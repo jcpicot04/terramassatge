@@ -493,6 +493,8 @@ p + p { margin-top: var(--sp-2); }
   font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase;
   transition: opacity 0.6s var(--ease);
 }
+/* Texto decorativo vía CSS: no cuenta como contenido (el indicador es aria-hidden) */
+.hero__desliza-texto::before { content: "Desliza"; }
 .hero__desliza.es-oculto { opacity: 0; }
 .hero__desliza.es-oculto .hero__desliza-linea { animation: none; }
 .hero__desliza-linea {
