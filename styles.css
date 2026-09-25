@@ -1,0 +1,1073 @@
+/* =============================================================================
+   TERRA MASSATGE · styles.css
+   =============================================================================
+
+   SISTEMA DE TOKENS
+   -----------------
+   Color (muestreado del logo real, no añadir otros marrones)
+     --terra-noche   #000000  fondo hero y secciones oscuras
+     --terra-raiz    #4D3A29  texto principal sobre papel (8,5:1 sobre papel ✔ AA)
+     --terra-bronce  #99735C  líneas, iconos, bordes (3,4:1 sobre papel → solo decorativo/grande)
+     --terra-cobre   #C39675  titulares sobre negro, botones (8:1 sobre negro ✔)
+     --terra-arena   #DFD2C1  texto sobre negro (14:1 ✔)
+     --terra-papel   #EDE4D8  fondo claro principal
+     --terra-salvia  #8A8F74  solo ilustraciones botánicas
+
+   Tipografía
+     Display: Marcellus → titulares y marca, MAYÚSCULAS + tracking .12em solo en h2/marca
+     Cuerpo:  Jost 300/400, line-height 1.65, medida máx. 65ch
+     Escala modular 1.333 con clamp() (móvil → escritorio):
+       --fs--1  0.80 → 0.85 rem   etiquetas, meta
+       --fs-0   1.00 → 1.06 rem   cuerpo
+       --fs-1   1.20 → 1.33 rem   entradilla, h3
+       --fs-2   1.45 → 1.78 rem   precios, h3 destacados
+       --fs-3   1.80 → 2.37 rem   h2
+       --fs-4   2.20 → 3.16 rem   display
+
+   Espaciado (base 8px): --sp-1 .5rem · -2 1rem · -3 1.5rem · -4 2rem · -5 3rem
+                         · -6 4.5rem · --sp-seccion clamp(4.5rem → 8rem)
+   Radio: 2px botones · 0 imágenes. Sin sombras.
+   Gutter lateral: 16px móvil · 32px ≥768px. Contenedor máx. 72rem.
+
+   BOCETOS
+   -------
+   MÓVIL (375)                              ESCRITORIO (1440)
+
+   Nav ─────────────────────                ────────────────────────────────────────
+   [◉ Terra]      [Reservar][≡]             [◉ Terra Massatge]   Rituales Héctor Visítanos [Reservar]
+
+   Hero (negro, pin 150 %) ─────            ────────────────────────────────────────
+   │        ( logo )        │               │               (  logo  )              │
+   │  Repara't. Respira...  │               │   Repara't. Respira. Torna més fort.  │
+   │  Quiromasaje y bien... │               │   Quiromasaje y bienestar en ...      │
+   │   [Reservar ritual]    │               │         [Reservar tu ritual]          │
+   │         │ desliza      │               │                 │                     │
+   → scroll: logo sube/encoge, textos se van, luz papel sube desde abajo
+
+   Qué es Terra (papel) ────                ────────────────────────────────────────
+   UN ESPACIO PARA PARAR                    🌿 │ UN ESPACIO PARA PARAR   │  🌿 ramas  │
+   ──── ◆ ────                                 │ texto…                  │  de olivo  │
+   texto…                                      │                         │  + piedra  │
+   (ilustración botánica, sin foto)            ├── 🌿Relajante ─ 🌿Descontr. ─ 🌿Deport.
+   🌿 Relajante / Descontr. / Deportivo
+
+   Rituales (papel) ────────                ────────────────────────────────────────
+   RITUALES TERRA                           RITUALES TERRA
+   Esencia Terra   50′ · 35 €               │ Esencia Terra  50 min · 35 € │ ┌ panel sticky ───┐ │
+   desc…                                    │ desc…                        │ │ subtítulo       │ │
+   Reservar →  o pregunta por WhatsApp      │ Reservar → · WhatsApp        │ │ intro           │ │
+   nota Booksy                              │ nota Booksy                  │ │ ◇ icono + texto │ │
+   [▸ Qué incluye]  (acordeón <details>)    │ ─────────────                │ │ ◇ icono + texto │ │
+   ┌ Combo Premium (borde cobre) ┐          │ Terra Reset …                │ └ fundido cruzado ┘ │
+
+   Combos (negro) ──────────                ──── (columna estrecha centrada) ─────────
+   ◉ Terra × JL Loyal                             BIENESTAR Y ESTILO, EN UNA SOLA VISITA
+   Combo        dur.   €                          Combo ................ dur. ..... €
+   [Reservar un combo] + nota Booksy              [Reservar un combo en Booksy]
+
+   Héctor (papel) ──────────                ────────────────────────────────────────
+   [foto 4:5 parallax]                      │ [foto 4:5 parallax] │ QUIÉN TE CUIDA   │
+   QUIÉN TE CUIDA / texto / “cita”          │                     │ texto… “cita”    │
+
+   Domicilio y eventos (foto a sangre) ─    ────────────────────────────────────────
+   (foto arriba, velo negro abajo)          │ velo 70 % │ TERRA TAMBIÉN VA A TI      │
+   TERRA TAMBIÉN VA A TI                    │ ← texto   │ A domicilio · 45 € [WA]    │
+   A domicilio · 45 € [WhatsApp]            │           │ Eventos privados   [WA]    │
+   Eventos privados   [WhatsApp]
+
+   Opiniones (papel) ───────                ────────────────────────────────────────
+   ★★★★★ 5,0 · 48 reseñas en Google          ★★★★★  5,0  48 reseñas en Google
+   ‹ carrusel scroll-snap › ● ○ ○           │ « reseña │ « reseña │ « reseña │
+   Ver todas · Deja tu reseña                     Ver todas · Deja tu reseña
+
+   Visítanos (papel) ───────                ────────────────────────────────────────
+   VEN A VERNOS                             VEN A VERNOS
+   Dirección / Horario / Tel / Pago         │ datos + horario       │ [ mapa (clic) ] │
+   [mapa (clic para cargar)]                │ [Reservar en Booksy] [WhatsApp]         │
+   [Reservar en Booksy] + nota              │ Llamar · Escribir un correo             │
+   [Escribir por WhatsApp]
+   Llamar · Escribir un correo
+
+   Pie (negro) ─────────────                ────────────────────────────────────────
+   logo · eslogan · datos · legal           │ logo+eslogan │ datos │ legal · ©     │
+   ========================================================================== */
+
+/* ---------- Tokens ---------- */
+:root {
+  --terra-noche: #000000;
+  --terra-raiz: #4D3A29;
+  --terra-bronce: #99735C;
+  --terra-cobre: #C39675;
+  --terra-arena: #DFD2C1;
+  --terra-papel: #EDE4D8;
+  --terra-salvia: #8A8F74;
+
+  --f-display: Marcellus, "Trajan Pro", Georgia, serif;
+  --f-cuerpo: Jost, "Helvetica Neue", Arial, sans-serif;
+
+  --fs--1: clamp(0.8rem, 0.78rem + 0.1vw, 0.85rem);
+  --fs-0: clamp(1rem, 0.97rem + 0.15vw, 1.0625rem);
+  --fs-1: clamp(1.2rem, 1.13rem + 0.35vw, 1.333rem);
+  --fs-2: clamp(1.45rem, 1.28rem + 0.8vw, 1.777rem);
+  --fs-3: clamp(1.8rem, 1.5rem + 1.4vw, 2.369rem);
+  --fs-4: clamp(2.2rem, 1.7rem + 2.4vw, 3.157rem);
+
+  --sp-1: 0.5rem;
+  --sp-2: 1rem;
+  --sp-3: 1.5rem;
+  --sp-4: 2rem;
+  --sp-5: 3rem;
+  --sp-6: 4.5rem;
+  --sp-seccion: clamp(4.5rem, 3rem + 6vw, 8rem);
+
+  --gutter: 16px;
+  --nav-alto: 64px;
+  --ease: cubic-bezier(0.33, 1, 0.68, 1); /* ≈ power2.out */
+}
+
+@media (min-width: 768px) {
+  :root { --gutter: 32px; --nav-alto: 76px; }
+}
+
+/* ---------- Base ---------- */
+*, *::before, *::after { box-sizing: border-box; }
+
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-padding-top: var(--nav-alto);
+}
+
+body {
+  margin: 0;
+  background: var(--terra-papel);
+  color: var(--terra-raiz);
+  font-family: var(--f-cuerpo);
+  font-weight: 300;
+  font-size: var(--fs-0);
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: clip;
+}
+
+img { display: block; max-width: 100%; height: auto; }
+h1, h2, h3, p, ul, ol, dl, dd, figure, blockquote { margin: 0; }
+ul[role="list"], ol[role="list"], .ideas, .opiniones__lista { list-style: none; padding: 0; }
+a { color: inherit; }
+address { font-style: normal; }
+strong { font-weight: 400; }
+
+/* Lenis */
+html.lenis, html.lenis body { height: auto; }
+.lenis.lenis-smooth { scroll-behavior: auto !important; }
+.lenis.lenis-stopped { overflow: hidden; }
+
+:focus-visible {
+  outline: 2px solid var(--terra-cobre);
+  outline-offset: 3px;
+}
+
+.sr-only {
+  position: absolute !important;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0 0 0 0);
+  white-space: nowrap; border: 0;
+}
+
+.sprite { position: absolute; width: 0; height: 0; overflow: hidden; }
+
+.saltar {
+  position: fixed; left: var(--gutter); top: -100px; z-index: 100;
+  background: var(--terra-cobre); color: var(--terra-noche);
+  padding: var(--sp-1) var(--sp-2); border-radius: 2px; text-decoration: none;
+}
+.saltar:focus { top: var(--sp-1); }
+
+/* Pendientes de validar por el cliente. Para el lanzamiento: .pendiente { display: none; } */
+.pendiente {
+  display: inline-block;
+  margin-left: 0.4em;
+  padding: 0.1em 0.5em;
+  font-size: var(--fs--1);
+  font-weight: 400;
+  line-height: 1.4;
+  background: #F4E3A6;
+  color: #3A2E12;
+  border-radius: 2px;
+  vertical-align: middle;
+}
+
+/* ---------- Layout ---------- */
+.contenedor {
+  width: 100%;
+  max-width: calc(72rem + 2 * var(--gutter));
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+.contenedor--estrecho { max-width: calc(46rem + 2 * var(--gutter)); }
+
+.seccion {
+  position: relative;
+  padding-block: var(--sp-seccion);
+  overflow: clip;
+}
+.seccion--papel { background: var(--terra-papel); color: var(--terra-raiz); }
+.seccion--noche { background: var(--terra-noche); color: var(--terra-arena); }
+
+.cabecera { text-align: center; margin-bottom: var(--sp-5); }
+
+/* ---------- Tipografía ---------- */
+.titulo {
+  font-family: var(--f-display);
+  font-weight: 400;
+  font-size: var(--fs-3);
+  line-height: 1.2;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-wrap: balance;
+}
+.seccion--noche .titulo, .eventos .titulo { color: var(--terra-cobre); }
+
+p { max-width: 65ch; }
+p + p { margin-top: var(--sp-2); }
+
+/* Separador: línea 1px bronce con la piedra del logo en el centro */
+.separador {
+  display: flex; align-items: center; gap: var(--sp-2);
+  width: min(14rem, 70%);
+  margin: var(--sp-3) auto var(--sp-4);
+  color: var(--terra-bronce);
+}
+.separador::before, .separador::after {
+  content: ""; flex: 1; height: 1px; background: currentColor;
+}
+.separador svg { width: 18px; height: 13px; flex: none; }
+.separador--izq { margin-left: 0; }
+
+/* Ilustraciones botánicas en los márgenes */
+.botanica {
+  position: absolute;
+  width: 120px; height: 320px;
+  color: var(--terra-salvia);
+  opacity: 0.35;
+  pointer-events: none;
+}
+.botanica--izq { left: -44px; top: var(--sp-5); transform: rotate(-8deg); }
+.botanica--der { right: -44px; top: var(--sp-5); transform: scaleX(-1) rotate(-8deg); }
+.botanica--abajo { top: auto; bottom: var(--sp-4); }
+@media (max-width: 767px) {
+  .botanica { display: none; } /* en móvil no hay margen libre: pisaría el texto */
+}
+@media (min-width: 1024px) {
+  .botanica { width: 150px; height: 400px; }
+  .botanica--izq { left: 0; }
+  .botanica--der { right: 0; }
+}
+
+/* ---------- Botones ---------- */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 0.6em;
+  min-height: 48px;
+  padding: 0.8rem 1.6rem;
+  border: 1px solid transparent;
+  border-radius: 2px;
+  font-family: var(--f-cuerpo);
+  font-weight: 400;
+  font-size: var(--fs--1);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.3s var(--ease), color 0.3s var(--ease), border-color 0.3s var(--ease);
+}
+.btn--cobre { background: var(--terra-cobre); color: var(--terra-noche); }
+.btn--cobre:hover { background: var(--terra-arena); }
+.btn--raiz { background: var(--terra-raiz); color: var(--terra-papel); }
+.btn--raiz:hover { background: var(--terra-noche); }
+.btn--linea { border-color: var(--terra-raiz); color: var(--terra-raiz); background: transparent; }
+.btn--linea:hover { background: var(--terra-raiz); color: var(--terra-papel); }
+.btn--linea-clara { border-color: var(--terra-arena); color: var(--terra-arena); background: transparent; }
+.btn--linea-clara:hover { background: var(--terra-arena); color: var(--terra-noche); }
+.btn--grande { min-height: 56px; font-size: var(--fs-0); padding-inline: 2rem; }
+.btn__icono { width: 1.25em; height: 1.25em; flex: none; }
+
+.enlace-reserva {
+  display: inline-flex; align-items: center;
+  min-height: 44px;
+  font-weight: 400;
+  font-size: var(--fs--1);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--terra-raiz);
+  border-bottom: 1px solid var(--terra-bronce);
+}
+.enlace-reserva::after { content: "→"; margin-left: 0.5em; transition: transform 0.3s var(--ease); }
+.enlace-reserva:hover::after { transform: translateX(4px); }
+
+.enlace-whatsapp {
+  display: inline-flex; align-items: center;
+  min-height: 44px;
+  font-size: var(--fs--1);
+  text-underline-offset: 4px;
+  text-decoration-color: var(--terra-bronce);
+}
+.menu-movil .nota-booksy { max-width: 22rem; text-align: center; }
+.combos .nota-booksy { margin-top: var(--sp-2); color: var(--terra-arena); }
+.btn { text-align: center; }
+
+/* ---------- Fotos ---------- */
+.foto { position: relative; overflow: hidden; background: var(--terra-arena); }
+.foto img { width: 100%; height: 100%; object-fit: cover; }
+.foto--parallax img { height: calc(100% + 48px); margin-top: -24px; max-width: none; }
+
+/* =============================================================================
+   NAVEGACIÓN
+   ========================================================================== */
+.nav {
+  position: fixed; inset: 0 0 auto; z-index: 50;
+  height: var(--nav-alto);
+  color: var(--terra-arena);
+  transition: color 0.4s var(--ease);
+}
+.nav::before {
+  content: ""; position: absolute; inset: 0; z-index: -1;
+  background: rgb(237 228 216 / 0.9);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgb(153 115 92 / 0.25);
+  opacity: 0;
+  transition: opacity 0.4s var(--ease);
+}
+.nav.es-solida { color: var(--terra-raiz); }
+.nav.es-solida::before { opacity: 1; }
+
+.nav__barra {
+  height: 100%;
+  display: flex; align-items: center; gap: var(--sp-2);
+}
+.nav__marca {
+  display: flex; align-items: center; gap: 0.6rem;
+  min-height: 44px;
+  margin-right: auto;
+  text-decoration: none;
+}
+.nav__piedra { width: 38px; height: 19px; color: var(--terra-cobre); }
+.nav.es-solida .nav__piedra { color: var(--terra-raiz); }
+.nav__nombre {
+  font-family: var(--f-display);
+  font-size: 1rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+.nav__enlaces { display: none; }
+.nav__reservar { min-height: 44px; padding: 0.6rem 1rem; }
+
+.nav__hamburguesa {
+  display: grid; place-items: center;
+  width: 44px; height: 44px;
+  margin-right: -10px;
+  padding: 0; border: 0; background: none; color: inherit; cursor: pointer;
+}
+.nav__hamburguesa-lineas,
+.nav__hamburguesa-lineas::before,
+.nav__hamburguesa-lineas::after {
+  display: block; width: 22px; height: 1.5px; background: currentColor; content: "";
+}
+.nav__hamburguesa-lineas { position: relative; }
+.nav__hamburguesa-lineas::before { position: absolute; top: -7px; }
+.nav__hamburguesa-lineas::after { position: absolute; top: 7px; }
+
+@media (max-width: 379px) {
+  .nav__nombre { display: none; }
+}
+
+@media (min-width: 900px) {
+  .nav__enlaces { display: flex; gap: var(--sp-4); margin-right: var(--sp-2); }
+  .nav__enlaces a {
+    display: inline-flex; align-items: center; min-height: 44px;
+    text-decoration: none;
+    font-weight: 400;
+    font-size: var(--fs--1);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    background: linear-gradient(currentColor, currentColor) no-repeat 0 78% / 0 1px;
+    transition: background-size 0.4s var(--ease);
+  }
+  .nav__enlaces a:hover { background-size: 100% 1px; }
+  .nav__hamburguesa { display: none; }
+  .nav__nombre { font-size: 1.05rem; }
+}
+
+/* Menú móvil */
+.menu-movil {
+  position: fixed; inset: 0; z-index: 60;
+  display: flex; flex-direction: column; justify-content: center;
+  padding: var(--sp-6) var(--gutter);
+  background: var(--terra-papel);
+  color: var(--terra-raiz);
+}
+.menu-movil[hidden] { display: none; }
+.menu-movil nav { display: flex; flex-direction: column; align-items: center; gap: var(--sp-3); }
+.menu-movil nav a:not(.btn) {
+  font-family: var(--f-display);
+  font-size: var(--fs-3);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-decoration: none;
+  min-height: 44px;
+}
+.menu-movil nav .btn { margin-top: var(--sp-3); }
+.menu-movil__cerrar {
+  position: absolute; top: 10px; right: calc(var(--gutter) - 10px);
+  width: 44px; height: 44px;
+  border: 0; background: none; color: inherit;
+  font-size: 2rem; line-height: 1; cursor: pointer;
+}
+
+/* =============================================================================
+   HERO
+   ========================================================================== */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  min-height: 100svh;
+  display: grid; place-items: center;
+  padding: calc(var(--nav-alto) + var(--sp-3)) var(--gutter) var(--sp-6);
+  background: var(--terra-noche);
+  color: var(--terra-arena);
+  text-align: center;
+  overflow: hidden;
+}
+/* Capa de luz: empieza bajo el hero y sube con el scroll como la luz que entra
+   (solo transform). Degradado vertical: transparente arriba, papel abajo. */
+.hero__luz {
+  position: absolute; left: 0; right: 0; top: 100%;
+  height: 200%;
+  background: linear-gradient(to bottom, rgb(237 228 216 / 0) 0%, rgb(237 228 216 / 0.35) 18%, var(--terra-papel) 45%);
+  will-change: transform;
+  pointer-events: none;
+}
+.hero__contenido { position: relative; display: grid; justify-items: center; gap: var(--sp-4); }
+.hero__titulo { margin: 0; line-height: 0; }
+.hero__marca {
+  position: relative;
+  display: block;
+  width: min(72vw, 46vh, 400px);
+  aspect-ratio: 1;
+  will-change: transform;
+}
+.hero__logo { display: block; width: 100%; height: 100%; color: var(--terra-cobre); }
+
+/* Logo HD (acabado metálico real): solo >768px, lo inserta main.js tras el dibujo.
+   Recortado en círculo al borde exterior del anillo y alineado con el SVG. */
+.hero__hd-capa { position: absolute; inset: 0; pointer-events: none; }
+.hero__hd {
+  position: absolute; inset: 0;
+  clip-path: circle(45.3% at 50% 50%);
+  opacity: 0;
+  pointer-events: none;
+}
+.hero__hd img {
+  position: absolute;
+  width: 105.46%; max-width: none; height: auto;
+  left: -3.22%; top: -2.85%;
+}
+
+.hero__textos { display: grid; justify-items: center; gap: var(--sp-2); }
+.hero__eslogan {
+  font-family: var(--f-display);
+  font-size: var(--fs-2);
+  line-height: 1.3;
+  color: var(--terra-arena);
+  text-wrap: balance;
+}
+.hero__sub { font-size: var(--fs-1); color: var(--terra-arena); font-weight: 300; }
+.hero__cta { margin-top: var(--sp-3); }
+
+.hero__desliza {
+  position: absolute; left: 50%; bottom: var(--sp-3);
+  display: grid; justify-items: center; gap: var(--sp-1);
+  transform: translateX(-50%);
+  color: var(--terra-bronce);
+  font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase;
+  transition: opacity 0.6s var(--ease);
+}
+.hero__desliza.es-oculto { opacity: 0; }
+.hero__desliza.es-oculto .hero__desliza-linea { animation: none; }
+.hero__desliza-linea {
+  width: 1px; height: 44px;
+  background: currentColor;
+  transform-origin: top;
+  animation: latido 2.8s ease-in-out infinite;
+}
+@keyframes latido {
+  0%, 100% { transform: scaleY(0.35); opacity: 0.4; }
+  50% { transform: scaleY(1); opacity: 1; }
+}
+
+/* Estado inicial de la intro (solo con movimiento; main.js lo revela) */
+.con-movimiento .hero__logo,
+.con-movimiento .hero__textos > *,
+.con-movimiento .hero__desliza { visibility: hidden; }
+
+/* =============================================================================
+   QUÉ ES TERRA
+   ========================================================================== */
+.terra__grid { display: grid; gap: var(--sp-5); }
+.terra__texto .titulo { text-align: center; }
+.terra__texto p { margin-inline: auto; }
+
+/* Ilustración botánica en lugar de la foto de la sala (pendiente) */
+.terra__ilustracion {
+  position: relative;
+  width: min(100%, 22rem);
+  aspect-ratio: 4 / 5;
+  margin-inline: auto;
+  color: var(--terra-salvia);
+}
+.terra__rama { position: absolute; width: 46%; height: 88%; }
+.terra__rama--a { left: 14%; top: 0; transform: rotate(-14deg); opacity: 0.75; }
+.terra__rama--b { right: 12%; top: 8%; transform: scaleX(-1) rotate(-10deg); opacity: 0.5; color: var(--terra-bronce); }
+.terra__piedra {
+  position: absolute; left: 22%; bottom: 4%;
+  width: 56%; height: 28%;
+  color: var(--terra-bronce);
+}
+@media (max-width: 767px) {
+  .terra__ilustracion { width: 12rem; aspect-ratio: 1; }
+  .terra__piedra { bottom: 0; }
+}
+
+.ideas {
+  display: grid; gap: var(--sp-4);
+  margin-top: var(--sp-6);
+  padding-top: var(--sp-5);
+  border-top: 1px solid rgb(153 115 92 / 0.4);
+}
+.idea {
+  position: relative;
+  padding-left: 56px;
+  min-height: 90px;
+}
+.idea__rama {
+  position: absolute; left: 0; top: -6px;
+  width: 36px; height: 96px;
+  color: var(--terra-salvia);
+  opacity: 0.8;
+}
+.idea__titulo {
+  font-family: var(--f-display);
+  font-weight: 400;
+  font-size: var(--fs-1);
+  letter-spacing: 0.04em;
+  margin-bottom: 0.25rem;
+}
+
+@media (min-width: 768px) {
+  .terra__grid { grid-template-columns: 1.3fr 1fr; align-items: center; gap: var(--sp-6); }
+  .terra__texto .titulo { text-align: left; }
+  .terra__texto .separador { margin-left: 0; }
+  .terra__texto p { margin-inline: 0; }
+  .ideas { grid-template-columns: repeat(3, 1fr); }
+}
+
+/* =============================================================================
+   RITUALES
+   ========================================================================== */
+.rituales__lista { list-style: none; padding: 0; display: grid; gap: var(--sp-5); }
+.ritual { display: grid; gap: var(--sp-2); justify-items: start; }
+.ritual__cabecera {
+  width: 100%;
+  display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between;
+  gap: 0.25rem var(--sp-2);
+  padding-bottom: var(--sp-1);
+  border-bottom: 1px solid rgb(153 115 92 / 0.5);
+}
+.ritual__nombre {
+  font-family: var(--f-display);
+  font-weight: 400;
+  font-size: var(--fs-2);
+  line-height: 1.2;
+}
+.ritual__meta { display: flex; align-items: baseline; gap: var(--sp-2); font-weight: 400; }
+.ritual__meta > span:first-child { font-size: var(--fs--1); letter-spacing: 0.08em; text-transform: uppercase; }
+.ritual__precio { font-family: var(--f-display); font-size: var(--fs-2); }
+.ritual__desc { max-width: 58ch; }
+.ritual__acciones { display: flex; flex-wrap: wrap; align-items: center; gap: 0 var(--sp-3); }
+
+.ritual--destacado {
+  padding: var(--sp-3);
+  border: 1px solid var(--terra-cobre);
+}
+
+.nota-booksy {
+  font-size: var(--fs--1);
+  line-height: 1.5;
+  font-style: italic;
+  opacity: 0.9;
+}
+.ritual .nota-booksy { margin-top: -0.4rem; }
+
+/* Acordeón "Qué incluye" (móvil y sin JS) */
+.ritual__incluye { width: 100%; border-top: 1px solid rgb(153 115 92 / 0.3); }
+.ritual__incluye summary {
+  display: flex; align-items: center; justify-content: space-between;
+  min-height: 48px;
+  cursor: pointer;
+  list-style: none;
+  font-weight: 400;
+  font-size: var(--fs--1);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.ritual__incluye summary::-webkit-details-marker { display: none; }
+.ritual__incluye summary::after {
+  content: ""; width: 10px; height: 10px;
+  border-right: 1px solid currentColor; border-bottom: 1px solid currentColor;
+  transform: translateY(-3px) rotate(45deg);
+  transition: transform 0.3s var(--ease);
+}
+.ritual__incluye[open] summary::after { transform: translateY(2px) rotate(-135deg); }
+.ritual__incluye .incluye { padding-bottom: var(--sp-3); }
+
+/* Contenido "qué incluye" (compartido por acordeón y panel) */
+.incluye { display: grid; gap: var(--sp-2); }
+.incluye p + p { margin-top: 0; }
+.incluye__foto { display: block; aspect-ratio: 1536 / 584; overflow: hidden; background: var(--terra-arena); }
+.incluye__foto img { width: 100%; height: 100%; object-fit: cover; }
+.incluye__subtitulo {
+  font-family: var(--f-display);
+  font-size: var(--fs-1);
+  letter-spacing: 0.04em;
+}
+.incluye__intro { font-style: italic; }
+.incluye__lista { list-style: none; padding: 0; display: grid; gap: var(--sp-2); margin-top: var(--sp-1); }
+.incluye__lista li { display: grid; grid-template-columns: 28px 1fr; gap: var(--sp-2); align-items: start; }
+.incluye__lista svg { width: 28px; height: 28px; color: var(--terra-bronce); }
+.incluye__lista p { max-width: none; }
+.incluye__lista strong { display: block; }
+.incluye__cierre { font-style: italic; }
+.incluye__firma { font-family: var(--f-display); }
+.incluye__firma span { font-family: var(--f-cuerpo); font-size: var(--fs--1); letter-spacing: 0.08em; text-transform: uppercase; margin-left: 0.3em; }
+
+.rituales__panel { display: none; }
+
+@media (min-width: 1024px) {
+  .rituales__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: var(--sp-6);
+  }
+  .rituales__lista { gap: 0; }
+  .ritual {
+    min-height: 60vh;
+    align-content: center;
+    padding-block: var(--sp-5);
+    border-top: 1px solid rgb(153 115 92 / 0.3);
+  }
+  .ritual:first-child { border-top: 0; }
+  .ritual--destacado { padding: var(--sp-4); margin-block: var(--sp-4); }
+
+  /* Con JS, el acordeón se sustituye por el panel fijo */
+  .js .ritual__incluye { display: none; }
+  .js .rituales__panel {
+    display: grid;
+    position: sticky;
+    top: var(--nav-alto);
+    align-self: start;
+    min-height: calc(100vh - var(--nav-alto));
+    align-items: center;
+  }
+  .panel {
+    grid-area: 1 / 1;
+    padding: var(--sp-3) var(--sp-4);
+    border-left: 1px solid rgb(153 115 92 / 0.5);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.7s var(--ease), visibility 0s linear 0.7s;
+  }
+  .panel.es-activo {
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.7s var(--ease), visibility 0s;
+  }
+  .panel .incluye { gap: var(--sp-1); font-size: 0.94rem; line-height: 1.5; }
+  .panel .incluye__lista { gap: var(--sp-1); }
+  .panel .incluye__foto { aspect-ratio: 16 / 5; }
+}
+@media (min-width: 1024px) and (max-height: 820px) {
+  /* En pantallas bajas el panel no cabe con la foto: se queda solo el texto */
+  .panel .incluye__foto { display: none; }
+}
+@media (min-width: 1024px) {
+  .panel__nombre {
+    font-family: var(--f-display);
+    font-size: var(--fs--1);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: var(--sp-2);
+  }
+}
+
+/* =============================================================================
+   COMBOS · BIENESTAR + ESTILO
+   ========================================================================== */
+.combos { text-align: center; }
+.combos .contenedor { display: grid; justify-items: center; }
+.combos .separador { color: var(--terra-bronce); }
+.combos__intro { margin-inline: auto; }
+
+.alianza {
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 0.6rem var(--sp-2);
+  margin-bottom: var(--sp-4);
+  font-size: var(--fs--1);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--terra-cobre);
+}
+.alianza__terra { display: inline-flex; align-items: center; gap: 0.6rem; }
+.alianza__terra svg { width: 34px; height: 17px; }
+.alianza__x { font-size: var(--fs-1); line-height: 1; }
+.alianza__loyal { display: inline-flex; align-items: center; gap: 0.6rem; }
+.alianza__jl { width: auto; height: 24px; }
+
+.combos__tabla {
+  width: 100%;
+  margin-block: var(--sp-5);
+  border-collapse: collapse;
+  text-align: left;
+}
+.combos__tabla thead th {
+  padding-bottom: var(--sp-1);
+  font-weight: 400;
+  font-size: var(--fs--1);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--terra-bronce);
+  border-bottom: 1px solid var(--terra-bronce);
+}
+.combos__tabla tbody th,
+.combos__tabla tbody td {
+  padding-block: var(--sp-2);
+  border-bottom: 1px solid rgb(153 115 92 / 0.35);
+  vertical-align: baseline;
+}
+.combos__tabla tbody th { font-weight: 300; padding-right: var(--sp-2); }
+.combos__tabla td { white-space: nowrap; }
+.combos__tabla td:last-child,
+.combos__tabla th:last-child { text-align: right; }
+.combos__tabla td:last-child { font-family: var(--f-display); font-size: var(--fs-1); color: var(--terra-cobre); }
+.combos__tabla td:nth-child(2) { padding-right: var(--sp-2); font-size: var(--fs--1); }
+
+@media (max-width: 479px) {
+  /* En móvil la duración va bajo el nombre para no apretar la tabla */
+  .combos__tabla thead th:nth-child(2) { display: none; }
+  .combos__tabla tbody tr { display: grid; grid-template-columns: 1fr auto; border-bottom: 1px solid rgb(153 115 92 / 0.35); padding-block: var(--sp-2); }
+  .combos__tabla tbody th, .combos__tabla tbody td { border: 0; padding: 0; }
+  .combos__tabla tbody td:nth-child(2) { grid-row: 2; }
+  .combos__tabla tbody td:last-child { grid-row: 1 / span 2; grid-column: 2; align-self: center; }
+  .combos__tabla thead tr { display: grid; grid-template-columns: 1fr auto; }
+}
+
+/* =============================================================================
+   HÉCTOR
+   ========================================================================== */
+.hector__grid { display: grid; gap: var(--sp-5); }
+.hector__foto { aspect-ratio: 4 / 5; max-width: 26rem; width: 100%; margin-inline: auto; }
+.hector__foto picture { display: block; height: 100%; }
+.hector__cita {
+  margin-top: var(--sp-3);
+  font-style: italic;
+  font-size: var(--fs--1);
+}
+.hector__firma {
+  margin-top: var(--sp-1);
+  font-family: var(--f-display);
+  font-size: var(--fs-1);
+  letter-spacing: 0.08em;
+  color: var(--terra-raiz);
+}
+.hector__firma::before { content: "— "; }
+
+@media (min-width: 768px) {
+  .hector__grid { grid-template-columns: 1fr 1.2fr; align-items: center; gap: var(--sp-6); }
+}
+
+/* =============================================================================
+   A DOMICILIO Y EVENTOS
+   ========================================================================== */
+.eventos {
+  position: relative;
+  display: grid; align-items: end;
+  min-height: 90vh;
+  min-height: 90svh;
+  padding-block: 40vw var(--sp-seccion);
+  overflow: hidden;
+  background: var(--terra-noche);
+  color: var(--terra-arena);
+}
+.eventos__fondo { position: absolute; inset: 0; overflow: hidden; }
+.eventos__fondo picture { display: block; height: 100%; }
+.eventos__fondo img { width: 100%; height: calc(100% + 48px); margin-top: -24px; object-fit: cover; object-position: 65% 50%; }
+/* Degradado de --terra-noche al 70 % bajo el texto */
+.eventos__fondo::after {
+  content: ""; position: absolute; inset: 0;
+  background: linear-gradient(to top, rgb(0 0 0 / 0.7) 0%, rgb(0 0 0 / 0.7) 62%, rgb(0 0 0 / 0.15) 100%);
+}
+.eventos__contenido { position: relative; display: grid; gap: var(--sp-4); }
+.eventos__bloques { display: grid; gap: var(--sp-5); }
+.eventos__bloque { display: grid; gap: var(--sp-2); justify-items: start; }
+.eventos__subtitulo {
+  font-family: var(--f-display);
+  font-weight: 400;
+  font-size: var(--fs-2);
+  color: var(--terra-cobre);
+}
+.eventos__bloque .btn { margin-top: var(--sp-1); }
+.eventos__nota { font-size: var(--fs--1); font-style: italic; }
+
+@media (min-width: 768px) {
+  .eventos { align-items: center; padding-block: var(--sp-seccion); }
+  .eventos__fondo::after {
+    background: linear-gradient(to right, rgb(0 0 0 / 0.7) 0%, rgb(0 0 0 / 0.7) 48%, rgb(0 0 0 / 0.1) 80%);
+  }
+  .eventos__contenido { max-width: 34rem; margin-left: max(var(--gutter), calc((100vw - 72rem) / 2)); padding: 0; }
+  .eventos__fondo img { object-position: 70% 50%; }
+}
+
+/* =============================================================================
+   OPINIONES
+   ========================================================================== */
+.opiniones { text-align: center; }
+.valoracion { display: grid; justify-items: center; gap: 0.25rem; margin-bottom: var(--sp-5); }
+.estrellas { display: inline-flex; gap: 2px; color: var(--terra-cobre); }
+.estrellas svg { width: 14px; height: 14px; }
+.estrellas--grandes svg { width: 24px; height: 24px; }
+.valoracion__nota { font-family: var(--f-display); font-size: var(--fs-4); line-height: 1.1; }
+.valoracion__total { font-size: var(--fs--1); letter-spacing: 0.08em; text-transform: uppercase; }
+
+/* Móvil: carrusel nativo con scroll-snap (nunca avanza solo) */
+.opiniones__lista {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 86%;
+  gap: var(--sp-3);
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  overscroll-behavior-x: contain;
+  scrollbar-width: none;
+  margin-inline: calc(-1 * var(--gutter));
+  padding-inline: var(--gutter);
+  scroll-padding-inline: var(--gutter);
+  text-align: left;
+}
+.opiniones__lista::-webkit-scrollbar { display: none; }
+.opinion {
+  position: relative;
+  scroll-snap-align: start;
+  display: grid; align-content: start; gap: var(--sp-2);
+  padding: var(--sp-5) 0 var(--sp-2);
+  border-top: 1px solid rgb(153 115 92 / 0.5);
+}
+.opinion__comillas {
+  position: absolute; top: -0.1em; left: 0;
+  font-family: var(--f-display);
+  font-size: 4rem;
+  line-height: 1;
+  color: var(--terra-bronce);
+}
+.opinion blockquote p { max-width: none; }
+.opinion__pie { display: flex; flex-wrap: wrap; align-items: center; gap: 0.3rem var(--sp-2); margin-top: auto; }
+.opinion__autor { font-family: var(--f-display); font-size: var(--fs-1); width: 100%; }
+.opinion__fuente { font-size: var(--fs--1); letter-spacing: 0.08em; text-transform: uppercase; }
+
+.carrusel__puntos { display: flex; justify-content: center; gap: 0.25rem; margin-top: var(--sp-2); }
+.carrusel__puntos button {
+  width: 44px; height: 44px;
+  padding: 0; border: 0; background: none; cursor: pointer;
+  display: grid; place-items: center;
+}
+.carrusel__puntos button::before {
+  content: ""; width: 8px; height: 8px; border-radius: 50%;
+  border: 1px solid var(--terra-raiz);
+  transition: background-color 0.3s var(--ease);
+}
+.carrusel__puntos button[aria-current="true"]::before { background: var(--terra-raiz); }
+
+.opiniones__enlaces { display: flex; flex-wrap: wrap; justify-content: center; gap: 0 var(--sp-4); margin: var(--sp-4) auto 0; }
+.opiniones__enlaces a {
+  display: inline-flex; align-items: center; min-height: 44px;
+  font-weight: 400; font-size: var(--fs--1); letter-spacing: 0.08em; text-transform: uppercase;
+  text-underline-offset: 4px; text-decoration-color: var(--terra-bronce);
+}
+
+@media (min-width: 768px) {
+  .opiniones__lista {
+    grid-auto-flow: row;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--sp-5);
+    overflow: visible;
+    margin-inline: 0; padding-inline: 0;
+  }
+  .carrusel__puntos { display: none; }
+}
+
+/* =============================================================================
+   VISÍTANOS
+   ========================================================================== */
+.visitanos__grid { display: grid; gap: var(--sp-5); }
+.datos { display: grid; gap: var(--sp-3); }
+.datos__fila { display: grid; gap: 0.2rem; }
+.datos dt {
+  font-weight: 400;
+  font-size: var(--fs--1);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+.datos dd { font-size: var(--fs-1); }
+.datos dd a { display: inline-flex; align-items: center; min-height: 44px; }
+.datos__alt { font-size: var(--fs-0); }
+.datos__nota { display: block; font-size: var(--fs-0); }
+.horario { list-style: none; padding: 0; display: grid; gap: 0.35rem; font-size: var(--fs-0); }
+.horario li { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 0 var(--sp-2); border-bottom: 1px dotted rgb(153 115 92 / 0.5); padding-bottom: 0.3rem; }
+.horario li span:first-child { font-weight: 400; }
+
+.mapa { display: grid; gap: var(--sp-1); }
+.mapa__fachada,
+.mapa iframe {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  border: 1px solid rgb(153 115 92 / 0.5);
+}
+.mapa__fachada {
+  display: grid; place-content: center; justify-items: center; gap: var(--sp-1);
+  background:
+    repeating-linear-gradient(45deg, rgb(153 115 92 / 0.08) 0 1px, transparent 1px 22px),
+    var(--terra-arena);
+  color: var(--terra-raiz);
+  font: inherit;
+  cursor: pointer;
+}
+.mapa__fachada svg { width: 36px; height: 32px; color: var(--terra-bronce); }
+.mapa__fachada > span:first-of-type {
+  font-family: var(--f-display); font-size: var(--fs-1); letter-spacing: 0.12em; text-transform: uppercase;
+}
+.mapa__nota { font-size: var(--fs--1); }
+.mapa__enlace { justify-self: start; display: inline-flex; align-items: center; min-height: 44px; font-size: var(--fs--1); }
+
+.reserva { display: grid; gap: var(--sp-3); margin-top: var(--sp-5); }
+.reserva__opcion { display: grid; gap: var(--sp-1); }
+.reserva__opcion .nota-booksy { text-align: center; margin-inline: auto; }
+.reserva__otros {
+  display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 0 var(--sp-2);
+  margin: var(--sp-3) auto 0;
+  text-align: center;
+}
+.reserva__otros a { display: inline-block; padding-block: 12px; line-height: 20px; overflow-wrap: anywhere; text-underline-offset: 4px; text-decoration-color: var(--terra-bronce); }
+
+@media (min-width: 768px) {
+  .visitanos__grid { grid-template-columns: 1fr 1.2fr; align-items: start; gap: var(--sp-6); }
+  .reserva { grid-template-columns: 1fr 1fr; align-items: start; }
+}
+
+/* =============================================================================
+   PIE
+   ========================================================================== */
+.pie {
+  padding-block: var(--sp-6) var(--sp-5);
+  background: var(--terra-noche);
+  color: var(--terra-arena);
+  font-size: var(--fs--1);
+}
+.pie__grid { display: grid; gap: var(--sp-4); text-align: center; justify-items: center; }
+.pie__logo { width: 96px; height: 96px; color: var(--terra-cobre); }
+.pie__eslogan { margin-top: var(--sp-2); font-family: var(--f-display); font-size: var(--fs-0); font-style: italic; color: var(--terra-cobre); }
+.pie a { display: inline-block; padding-block: 12px; line-height: 20px; text-decoration-color: var(--terra-bronce); text-underline-offset: 3px; }
+.pie p { margin-inline: auto; }
+.pie p + p { margin-top: 0; }
+
+@media (min-width: 768px) {
+  .pie__grid { grid-template-columns: 1.3fr 1fr 1fr 1fr; text-align: left; justify-items: start; align-items: start; }
+  .pie p { margin-inline: 0; }
+  .pie__legal { justify-self: end; text-align: right; }
+}
+
+/* =============================================================================
+   WHATSAPP FLOTANTE (solo móvil)
+   ========================================================================== */
+.whatsapp-flotante {
+  position: fixed; right: var(--gutter); bottom: var(--gutter); z-index: 40;
+  display: grid; place-items: center;
+  width: 56px; height: 56px;
+  border-radius: 50%;
+  background: var(--terra-cobre);
+  color: var(--terra-noche);
+  opacity: 0;
+  transform: translateY(16px);
+  pointer-events: none;
+  transition: opacity 0.5s var(--ease), transform 0.5s var(--ease);
+}
+.whatsapp-flotante svg { width: 28px; height: 28px; }
+.whatsapp-flotante.es-visible { opacity: 1; transform: none; pointer-events: auto; }
+@media (min-width: 900px) { .whatsapp-flotante { display: none; } }
+
+/* Aviso breve (p. ej. "correo copiado") */
+.aviso {
+  position: fixed; left: 50%; bottom: calc(var(--gutter) + 72px); z-index: 70;
+  width: min(calc(100% - 2 * var(--gutter)), 28rem);
+  padding: var(--sp-2) var(--sp-3);
+  background: var(--terra-raiz);
+  color: var(--terra-papel);
+  border-radius: 2px;
+  font-size: var(--fs--1);
+  line-height: 1.5;
+  text-align: center;
+  opacity: 0;
+  transform: translate(-50%, 12px);
+  pointer-events: none;
+  transition: opacity 0.4s var(--ease), transform 0.4s var(--ease);
+}
+.aviso.es-visible { opacity: 1; transform: translate(-50%, 0); }
+@media (min-width: 900px) { .aviso { bottom: var(--sp-4); } }
+
+/* =============================================================================
+   ENTRADAS DE SECCIÓN (main.js las revela una vez por sección)
+   ========================================================================== */
+.con-movimiento [data-reveal] { opacity: 0; }
+
+/* =============================================================================
+   MOVIMIENTO REDUCIDO: todo visible, nada se anima
+   ========================================================================== */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation: none !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .hero__desliza-linea { transform: none; opacity: 0.8; }
+  .foto--parallax img, .eventos__fondo img { height: 100%; margin-top: 0; }
+  .hero__hd { display: none; }
+}
+
+/* =============================================================================
+   PÁGINAS LEGALES (aviso-legal.html, privacidad.html)
+   ========================================================================== */
+.legal-cabecera {
+  background: var(--terra-noche);
+  color: var(--terra-arena);
+  padding-block: var(--sp-3);
+}
+.legal-cabecera .contenedor { display: flex; align-items: center; justify-content: space-between; gap: var(--sp-2); }
+.legal-cabecera a { display: inline-flex; align-items: center; gap: 0.6rem; min-height: 44px; text-decoration: none; }
+.legal-cabecera svg { width: 38px; height: 19px; color: var(--terra-cobre); }
+.legal {
+  padding-block: var(--sp-6);
+  max-width: calc(46rem + 2 * var(--gutter));
+}
+.legal h1 { font-family: var(--f-display); font-weight: 400; font-size: var(--fs-3); letter-spacing: 0.12em; text-transform: uppercase; line-height: 1.2; }
+.legal h2 { font-family: var(--f-display); font-weight: 400; font-size: var(--fs-1); margin-top: var(--sp-5); margin-bottom: var(--sp-2); }
+.legal p, .legal li { max-width: 65ch; }
+.legal ul { padding-left: 1.2em; display: grid; gap: 0.4rem; margin-block: var(--sp-2); }
+.legal .actualizado { font-size: var(--fs--1); margin-top: var(--sp-1); }
+.legal .hueco { background: #F4E3A6; color: #3A2E12; padding: 0 0.3em; border-radius: 2px; }

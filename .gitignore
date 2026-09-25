@@ -1,0 +1,12 @@
+# Originales del cliente (solo lectura, no se publican)
+/*.jpg
+/*.jpeg
+/assets/*.jpeg
+
+# Notas internas: Netlify publica todo el repositorio
+PENDIENTES.md
+
+# Sistema
+.DS_Store
+Thumbs.db
+desktop.ini

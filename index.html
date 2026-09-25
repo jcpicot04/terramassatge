@@ -1,0 +1,642 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Terra Massatge | Quiromasaje y bienestar en Carcaixent</title>
+  <meta name="description" content="Masaje relajante, descontracturante y deportivo en Carcaixent. Rituales Terra desde 22,50 €. Reserva online o por WhatsApp.">
+  <meta name="theme-color" content="#000000">
+  <link rel="canonical" href="https://terramassatge.es/">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="es_ES">
+  <meta property="og:site_name" content="Terra Massatge">
+  <meta property="og:title" content="Terra Massatge | Quiromasaje y bienestar en Carcaixent">
+  <meta property="og:description" content="Masaje relajante, descontracturante y deportivo en Carcaixent. Rituales Terra desde 22,50 €. Reserva online o por WhatsApp.">
+  <meta property="og:url" content="https://terramassatge.es/">
+  <meta property="og:image" content="https://terramassatge.es/assets/og-image.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Logo de Terra Massatge en cobre sobre fondo negro">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- Iconos -->
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="assets/favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png" sizes="180x180">
+
+  <!-- Tipografías -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400&family=Marcellus&display=swap">
+
+  <link rel="stylesheet" href="styles.css">
+
+  <!-- Marca el documento antes del primer pintado para evitar parpadeos en la intro -->
+  <script>
+    (function () {
+      var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      document.documentElement.classList.add('js', reduce ? 'sin-movimiento' : 'con-movimiento');
+    })();
+  </script>
+
+  <!-- El JSON-LD (HealthAndBeautyBusiness) lo genera main.js a partir de CONTACTO, HORARIO y RITUALES,
+       para que los datos vivan en un solo sitio. Google lo lee tras ejecutar el JavaScript. -->
+
+  <!-- Animación: GSAP 3 + ScrollTrigger y Lenis (versiones fijadas) -->
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+  <script defer src="main.js"></script>
+</head>
+<body>
+  <!-- ======================================================================
+       Sprite de símbolos reutilizables (logo, botánica e iconos de los flyers)
+       Iconos: línea de 1,5px en --terra-bronce, dibujados a mano.
+       ====================================================================== -->
+  <svg class="sprite" aria-hidden="true" focusable="false">
+    <symbol id="s-piedra" viewBox="145 97 110 96">
+      <path fill="currentColor" d="M152 117C156 110 160 107 165 105C171 102 176 100 182 100C192 99 202 100 210 102C220 105 229 108 235 112C242 116 246 120 248 125C252 132 253 139 253 145C252 151 250 156 247 160C244 165 242 169 240 172C238 176 237 178 235 180C230 185 226 188 220 189C210 191 200 191 190 190C182 189 176 188 172 185C168 182 166 178 165 175C163 171 162 168 160 165C156 160 152 156 150 150C148 144 147 138 147 132C147 126 149 121 152 117Z"/>
+    </symbol>
+    <symbol id="s-piedra-manos" viewBox="60 86 280 140">
+      <g fill="none" stroke="currentColor" stroke-width="9" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M89 92.5C110 102 132 118 152 134M67.5 127.5L95 140C100 158 110 178 125 190C145 202 175 207 215 211M122 150C138 156 152 166 160 175M161 181A4.5 4.5 0 1 1 169 176M125 185C150 192 180 200 205 205C214 207 218 213 214 218C210 222 200 221 195 217"/>
+        <path transform="translate(400 0) scale(-1 1)" d="M89 92.5C110 102 132 118 152 134M67.5 127.5L95 140C100 158 110 178 125 190C145 202 175 207 215 211M122 150C138 156 152 166 160 175M161 181A4.5 4.5 0 1 1 169 176M125 185C150 192 180 200 205 205C214 207 218 213 214 218C210 222 200 221 195 217"/>
+      </g>
+      <path fill="currentColor" d="M152 117C156 110 160 107 165 105C171 102 176 100 182 100C192 99 202 100 210 102C220 105 229 108 235 112C242 116 246 120 248 125C252 132 253 139 253 145C252 151 250 156 247 160C244 165 242 169 240 172C238 176 237 178 235 180C230 185 226 188 220 189C210 191 200 191 190 190C182 189 176 188 172 185C168 182 166 178 165 175C163 171 162 168 160 165C156 160 152 156 150 150C148 144 147 138 147 132C147 126 149 121 152 117Z"/>
+    </symbol>
+    <symbol id="s-rama" viewBox="0 0 120 320">
+      <g fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M62 318C58 250 70 190 60 130C54 90 60 50 72 8"/>
+        <path d="M0 0C8-9 24-9 34 0C24 9 8 9 0 0Z M4 0H30" transform="translate(61 280) rotate(-28)"/>
+        <path d="M0 0C8-9 24-9 34 0C24 9 8 9 0 0Z M4 0H30" transform="translate(63 250) rotate(-152)"/>
+        <path d="M0 0C8-9 24-9 34 0C24 9 8 9 0 0Z M4 0H30" transform="translate(64 214) rotate(-36)"/>
+        <path d="M0 0C8-9 24-9 34 0C24 9 8 9 0 0Z M4 0H30" transform="translate(63 184) rotate(-146)"/>
+        <path d="M0 0C8-9 24-9 34 0C24 9 8 9 0 0Z M4 0H30" transform="translate(61 148) rotate(-30)"/>
+        <path d="M0 0C8-9 24-9 34 0C24 9 8 9 0 0Z M4 0H30" transform="translate(58 116) rotate(-150)"/>
+        <path d="M0 0C8-9 24-9 34 0C24 9 8 9 0 0Z M4 0H30" transform="translate(60 80) rotate(-40)"/>
+        <path d="M0 0C8-9 24-9 34 0C24 9 8 9 0 0Z M4 0H30" transform="translate(64 50) rotate(-140)"/>
+        <path d="M0 0C8-9 24-9 34 0C24 9 8 9 0 0Z M4 0H30" transform="translate(71 12) rotate(-70)"/>
+        <ellipse cx="44" cy="232" rx="4" ry="5"/>
+        <ellipse cx="80" cy="100" rx="4" ry="5"/>
+      </g>
+    </symbol>
+    <symbol id="s-whatsapp" viewBox="0 0 24 24">
+      <path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2c-1.5 0-3-.4-4.3-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.4.1-.7.3-.2.3-.9.9-.9 2.2s.9 2.5 1 2.7c.1.2 1.8 2.8 4.4 3.9 1.6.7 2.3.8 3.1.6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.2-.3-.2-.5-.3Z"/>
+    </symbol>
+    <symbol id="s-estrella" viewBox="0 0 24 24">
+      <path fill="currentColor" d="M12 2.8l2.7 5.9 6.4.7-4.8 4.3 1.4 6.3L12 16.8 6.3 20l1.4-6.3L2.9 9.4l6.4-.7Z"/>
+    </symbol>
+
+    <!-- Iconos "qué incluye" -->
+    <symbol id="i-hoja" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" d="M5 19C5 10.5 10.5 5 19 5c0 8.5-5.5 14-14 14Zm0 0 9-9"/></symbol>
+    <symbol id="i-gota" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" d="M12 3s-6 7-6 11a6 6 0 0 0 12 0c0-4-6-11-6-11Zm-2.5 11.5a2.5 2.5 0 0 0 2.5 2.5"/></symbol>
+    <symbol id="i-ondas" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" d="M3 8c3-2 6-2 9 0s6 2 9 0M3 12c3-2 6-2 9 0s6 2 9 0M3 16c3-2 6-2 9 0s6 2 9 0"/></symbol>
+    <symbol id="i-instrumento" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 19.5l8-8"/><circle cx="16" cy="8" r="4"/><path d="M14.5 6.5l3 3"/></g></symbol>
+    <symbol id="i-nota" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V6l10-2v12"/><circle cx="7" cy="18" r="2"/><circle cx="17" cy="16" r="2"/></g></symbol>
+    <symbol id="i-mano-corazon" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M13 10.5s-3.2-2-3.2-4.2a1.7 1.7 0 0 1 3.2-.8 1.7 1.7 0 0 1 3.2.8c0 2.2-3.2 4.2-3.2 4.2Z"/><path d="M3 14.5h3.5l3.5 1.8h3.5a1.4 1.4 0 0 1 0 2.8H10"/><path d="M13.5 19.1l5-2.3a1.5 1.5 0 0 1 1.3 2.7L13.5 22H6.5l-3.5-1.5"/></g></symbol>
+    <symbol id="i-termometro" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 14V5a2 2 0 0 1 4 0v9a3.5 3.5 0 1 1-4 0Z"/><path d="M9 10v6.5"/><path d="M18 3v7M15 4.8l6 3.4M15 8.2l6-3.4"/></g></symbol>
+    <symbol id="i-mano" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" d="M8 13V6a1.2 1.2 0 0 1 2.4 0v5m0 0V4.5a1.2 1.2 0 0 1 2.4 0V11m0 0V5.5a1.2 1.2 0 0 1 2.4 0V12m0 0V8a1.2 1.2 0 0 1 2.4 0v6c0 4-2.5 7-6 7-2.5 0-4-1.2-5.5-3.5L4 14.5a1.3 1.3 0 0 1 2.1-1.5L8 15"/></symbol>
+    <symbol id="i-diana" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5.5"/><circle cx="12" cy="12" r="1.8"/></g></symbol>
+    <symbol id="i-articulacion" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" d="M10 2.5v6a2 2 0 0 0 4 0v-6M10 21.5v-6a2 2 0 0 1 4 0v6M7 10.5c-1 1-1 2 0 3M17 10.5c1 1 1 2 0 3"/></symbol>
+    <symbol id="i-ventosa" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" d="M8 18v-7a4 4 0 0 1 8 0v7M6.5 18h11M3 21c3-1 6-1 9 0s6 1 9 0M10.5 7V4.5h3V7"/></symbol>
+    <symbol id="i-columna" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="2.5" width="6" height="3.5" rx="1.2"/><rect x="8.5" y="7.5" width="7" height="3.5" rx="1.2"/><rect x="8.5" y="12.5" width="7" height="3.5" rx="1.2"/><rect x="9" y="17.5" width="6" height="3.5" rx="1.2"/><path d="M6 4.3h1.5M16.5 4.3H18M5.5 9.3H7M17 9.3h1.5M5.5 14.3H7M17 14.3h1.5"/></g></symbol>
+  </svg>
+
+  <a class="saltar" href="#contenido">Saltar al contenido</a>
+
+  <!-- ============ NAVEGACIÓN ============ -->
+  <header class="nav" data-nav>
+    <div class="nav__barra contenedor">
+      <a class="nav__marca" href="#inicio" aria-label="Terra Massatge, ir al inicio">
+        <svg class="nav__piedra" aria-hidden="true" focusable="false"><use href="#s-piedra-manos"/></svg>
+        <span class="nav__nombre">Terra Massatge</span>
+      </a>
+      <nav class="nav__enlaces" aria-label="Principal">
+        <a href="#rituales">Rituales</a>
+        <a href="#hector">Héctor</a>
+        <a href="#visitanos">Visítanos</a>
+      </nav>
+      <a class="btn btn--cobre nav__reservar" href="#visitanos" data-enlace="booksy" aria-describedby="nota-booksy-nav">Reservar</a>
+      <span class="sr-only" id="nota-booksy-nav">Te llevamos a nuestra agenda en Booksy. Busca la sección Quiromasaje.</span>
+      <button class="nav__hamburguesa" type="button" aria-expanded="false" aria-controls="menu-movil" data-menu-abrir>
+        <span class="sr-only">Abrir menú</span>
+        <span class="nav__hamburguesa-lineas" aria-hidden="true"></span>
+      </button>
+    </div>
+  </header>
+
+  <div class="menu-movil" id="menu-movil" role="dialog" aria-modal="true" aria-label="Menú" hidden data-menu>
+    <button class="menu-movil__cerrar" type="button" data-menu-cerrar>
+      <span class="sr-only">Cerrar menú</span>
+      <span aria-hidden="true">×</span>
+    </button>
+    <nav aria-label="Menú móvil">
+      <a href="#rituales">Rituales</a>
+      <a href="#hector">Héctor</a>
+      <a href="#visitanos">Visítanos</a>
+      <a class="btn btn--raiz" href="#visitanos" data-enlace="booksy">Reservar</a>
+      <p class="nota-booksy">Te llevamos a nuestra agenda en Booksy. Busca la sección Quiromasaje.</p>
+    </nav>
+  </div>
+
+  <main id="contenido">
+    <!-- ============ HERO ============ -->
+    <section class="hero" id="inicio" data-hero>
+      <div class="hero__luz" aria-hidden="true"></div>
+      <div class="hero__contenido">
+        <h1 class="hero__titulo">
+          <span class="hero__marca" data-marca>
+            <!-- Recreación provisional del logo, trazada sobre el logo HD (ver assets/logo-terra.svg). [CONFIRMAR] vector original -->
+            <svg class="hero__logo" viewBox="0 0 400 400" role="img" aria-label="Terra Massatge" data-logo>
+              <circle id="circulo" cx="200" cy="200" r="177" fill="none" stroke="currentColor" stroke-width="4"/>
+              <g id="manos" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M89 92.5C110 102 132 118 152 134M67.5 127.5L95 140C100 158 110 178 125 190C145 202 175 207 215 211M122 150C138 156 152 166 160 175M161 181A4.5 4.5 0 1 1 169 176M125 185C150 192 180 200 205 205C214 207 218 213 214 218C210 222 200 221 195 217"/>
+                <path transform="translate(400 0) scale(-1 1)" d="M89 92.5C110 102 132 118 152 134M67.5 127.5L95 140C100 158 110 178 125 190C145 202 175 207 215 211M122 150C138 156 152 166 160 175M161 181A4.5 4.5 0 1 1 169 176M125 185C150 192 180 200 205 205C214 207 218 213 214 218C210 222 200 221 195 217"/>
+              </g>
+              <path id="piedra" fill="currentColor" d="M152 117C156 110 160 107 165 105C171 102 176 100 182 100C192 99 202 100 210 102C220 105 229 108 235 112C242 116 246 120 248 125C252 132 253 139 253 145C252 151 250 156 247 160C244 165 242 169 240 172C238 176 237 178 235 180C230 185 226 188 220 189C210 191 200 191 190 190C182 189 176 188 172 185C168 182 166 178 165 175C163 171 162 168 160 165C156 160 152 156 150 150C148 144 147 138 147 132C147 126 149 121 152 117Z"/>
+              <g id="texto" fill="currentColor" font-family="Marcellus, 'Trajan Pro', Georgia, serif" text-anchor="middle">
+                <text x="200" y="287.5" font-size="64" textLength="220" lengthAdjust="spacing">TERRA</text>
+                <text x="200" y="331" font-size="41" textLength="220" lengthAdjust="spacing">MASSATGE</text>
+              </g>
+            </svg>
+            <!-- main.js inserta aquí el logo HD (solo >768px y con movimiento) -->
+          </span>
+        </h1>
+        <div class="hero__textos">
+          <p class="hero__eslogan" lang="ca">Repara't. Respira. Torna més fort.</p>
+          <p class="hero__sub">Quiromasaje y bienestar en Carcaixent.</p>
+          <a class="btn btn--cobre hero__cta" href="#visitanos">Reservar tu ritual</a>
+        </div>
+      </div>
+      <div class="hero__desliza" aria-hidden="true">
+        <span class="hero__desliza-texto">Desliza</span>
+        <span class="hero__desliza-linea"></span>
+      </div>
+    </section>
+
+    <!-- ============ QUÉ ES TERRA ============ -->
+    <section class="seccion seccion--papel terra" id="terra" aria-labelledby="terra-titulo">
+      <svg class="botanica botanica--izq" aria-hidden="true" focusable="false"><use href="#s-rama"/></svg>
+      <div class="contenedor" data-reveal>
+        <div class="terra__grid">
+          <div class="terra__texto">
+            <h2 class="titulo" id="terra-titulo">Un espacio para parar</h2>
+            <div class="separador" aria-hidden="true"><svg><use href="#s-piedra"/></svg></div>
+            <p>Terra Massatge nace para que encuentres un momento solo para ti. Un lugar donde desconectar, aliviar tensiones y sentirte realmente cuidado.</p>
+            <p>Cada sesión es única: tú eliges el ambiente, el aroma y el ritual de finalización. Masaje manual, toallas calientes y técnicas adaptadas a lo que tu cuerpo necesita ese día.</p>
+          </div>
+          <!-- [CONFIRMAR] Foto de la sala preparada. Mientras tanto, ilustración botánica de línea. -->
+          <div class="terra__ilustracion" aria-hidden="true">
+            <svg class="terra__rama terra__rama--a"><use href="#s-rama"/></svg>
+            <svg class="terra__rama terra__rama--b"><use href="#s-rama"/></svg>
+            <svg class="terra__piedra"><use href="#s-piedra-manos"/></svg>
+          </div>
+        </div>
+        <ul class="ideas">
+          <li class="idea">
+            <svg class="idea__rama" aria-hidden="true" focusable="false"><use href="#s-rama"/></svg>
+            <h3 class="idea__titulo">Relajante</h3>
+            <p>Para desconectar cuerpo y mente.</p>
+          </li>
+          <li class="idea">
+            <svg class="idea__rama" aria-hidden="true" focusable="false"><use href="#s-rama"/></svg>
+            <h3 class="idea__titulo">Descontracturante</h3>
+            <p>Para soltar la tensión acumulada.</p>
+          </li>
+          <li class="idea">
+            <svg class="idea__rama" aria-hidden="true" focusable="false"><use href="#s-rama"/></svg>
+            <h3 class="idea__titulo">Deportivo</h3>
+            <p>Para recuperarte y rendir mejor.</p>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ============ RITUALES ============
+         Nombres, duraciones y precios se rellenan desde RITUALES en main.js (data-dato).
+         El texto que hay aquí es el valor por defecto, para quien navegue sin JavaScript. -->
+    <section class="seccion seccion--papel rituales" id="rituales" aria-labelledby="rituales-titulo">
+      <svg class="botanica botanica--der" aria-hidden="true" focusable="false"><use href="#s-rama"/></svg>
+      <div class="contenedor" data-reveal>
+        <header class="cabecera">
+          <h2 class="titulo" id="rituales-titulo">Rituales Terra</h2>
+          <div class="separador" aria-hidden="true"><svg><use href="#s-piedra"/></svg></div>
+        </header>
+
+        <div class="rituales__grid">
+          <ol class="rituales__lista" role="list">
+
+            <!-- Esencia Terra -->
+            <li class="ritual" data-ritual="esencia">
+              <div class="ritual__cabecera">
+                <h3 class="ritual__nombre" data-dato="esencia.nombre">Esencia Terra</h3>
+                <p class="ritual__meta"><span data-dato="esencia.duracion">50 min de masaje</span><span class="ritual__precio" data-dato="esencia.precio">35 €</span></p>
+              </div>
+              <p class="ritual__desc">Nuestro masaje relajante de la casa, de inspiración mediterránea. Toallas calientes y una gran variedad de técnicas para aliviar el estrés y la tensión muscular. Tú eliges el ambiente, el aroma y el ritual final.</p>
+              <div class="ritual__acciones">
+                <a class="enlace-reserva" href="#visitanos" data-enlace="booksy">Reservar<span class="sr-only"> <span data-dato="esencia.nombre">Esencia Terra</span> en Booksy</span></a>
+                <a class="enlace-whatsapp" href="#visitanos" data-enlace="whatsapp" data-mensaje-ritual="esencia">o pregunta por WhatsApp</a>
+              </div>
+              <p class="nota-booksy">Te llevamos a nuestra agenda en Booksy. Busca la sección Quiromasaje.</p>
+              <details class="ritual__incluye">
+                <summary>Qué incluye</summary>
+                <div class="incluye" data-incluye="esencia">
+                  <p class="incluye__subtitulo">Masaje relajante premium</p>
+                  <p class="incluye__intro">Un masaje pensado para desconectar del mundo y reconectar contigo mismo. Una experiencia profunda de relajación y autoconocimiento.</p>
+                  <ul class="incluye__lista" role="list">
+                    <li><svg aria-hidden="true"><use href="#i-hoja"/></svg><p><strong>Aromas esenciales intensos.</strong> Fragancias que te envuelven y te transportan.</p></li>
+                    <li><svg aria-hidden="true"><use href="#i-gota"/></svg><p><strong>Aceites de gran calidad.</strong> Nutren, protegen y aportan bienestar.</p></li>
+                    <li><svg aria-hidden="true"><use href="#i-ondas"/></svg><p><strong>Movimientos rítmicos y profundos.</strong> Adaptados a cada cuerpo y necesidad.</p></li>
+                    <li><svg aria-hidden="true"><use href="#i-instrumento"/></svg><p><strong>Uso de instrumentos.</strong> Técnicas variadas para una experiencia única.</p></li>
+                    <li><svg aria-hidden="true"><use href="#i-nota"/></svg><p><strong>Música rítmica.</strong> Que acompasa la sesión y favorece la relajación.</p></li>
+                    <li><svg aria-hidden="true"><use href="#i-mano-corazon"/></svg><p><strong>Masaje consciente.</strong> Presencia, conexión y cuidado en cada detalle.</p></li>
+                  </ul>
+                  <p class="incluye__cierre">Una experiencia sensorial que te permite salir relajado, renovado y con más energía.</p>
+                  <p class="incluye__firma">“Un masaje único donde doy todo de mí.” <span>— Héctor</span></p>
+                </div>
+              </details>
+            </li>
+
+            <!-- Terra Express -->
+            <li class="ritual" data-ritual="express">
+              <div class="ritual__cabecera">
+                <h3 class="ritual__nombre" data-dato="express.nombre">Terra Express</h3>
+                <p class="ritual__meta"><span data-dato="express.duracion">30 min</span><span class="ritual__precio" data-dato="express.precio">22,50 €</span></p>
+              </div>
+              <p class="ritual__desc">La experiencia Terra en formato corto. Una pausa para liberar tensiones después del trabajo o, simplemente, porque te lo mereces.</p>
+              <div class="ritual__acciones">
+                <a class="enlace-reserva" href="#visitanos" data-enlace="booksy">Reservar<span class="sr-only"> Terra Express en Booksy</span></a>
+                <a class="enlace-whatsapp" href="#visitanos" data-enlace="whatsapp" data-mensaje-ritual="express">o pregunta por WhatsApp</a>
+              </div>
+              <p class="nota-booksy">Te llevamos a nuestra agenda en Booksy. Busca la sección Quiromasaje.</p>
+              <details class="ritual__incluye">
+                <summary>Qué incluye</summary>
+                <div class="incluye" data-incluye="express">
+                  <p class="incluye__subtitulo">Relajante exprés</p>
+                  <p class="incluye__intro">La experiencia <span data-dato="esencia.nombre">Esencia Terra</span> en 30 minutos.</p>
+                </div>
+              </details>
+            </li>
+
+            <!-- Terra Reset -->
+            <li class="ritual" data-ritual="reset">
+              <div class="ritual__cabecera">
+                <h3 class="ritual__nombre" data-dato="reset.nombre">Terra Reset</h3>
+                <p class="ritual__meta"><span data-dato="reset.duracion">55 min</span><span class="ritual__precio" data-dato="reset.precio">35 €</span></p>
+              </div>
+              <p class="ritual__desc">Masaje descontracturante y deportivo, centrado en las zonas que más te duelen. Combina técnicas manuales y terapéuticas avanzadas para descargar sobrecargas.</p>
+              <div class="ritual__acciones">
+                <a class="enlace-reserva" href="#visitanos" data-enlace="booksy">Reservar<span class="sr-only"> Terra Reset en Booksy</span></a>
+                <a class="enlace-whatsapp" href="#visitanos" data-enlace="whatsapp" data-mensaje-ritual="reset">o pregunta por WhatsApp</a>
+              </div>
+              <p class="nota-booksy">Te llevamos a nuestra agenda en Booksy. Busca la sección Quiromasaje.</p>
+              <details class="ritual__incluye">
+                <summary>Qué incluye</summary>
+                <div class="incluye" data-incluye="reset">
+                  <picture class="incluye__foto">
+                    <source type="image/webp" srcset="assets/img/ritual-reset-800.webp 800w, assets/img/ritual-reset.webp 1536w" sizes="(min-width: 1024px) 40vw, 100vw">
+                    <img src="assets/img/ritual-reset-800.jpg" srcset="assets/img/ritual-reset-800.jpg 800w, assets/img/ritual-reset.jpg 1536w" sizes="(min-width: 1024px) 40vw, 100vw"
+                         width="1536" height="584" loading="lazy" decoding="async"
+                         alt="Héctor estira la pierna de un cliente tumbado boca abajo durante un masaje Terra Reset">
+                  </picture>
+                  <p class="incluye__subtitulo">Masaje descontracturante profesional</p>
+                  <p class="incluye__intro">Basado en los principios del quiromasaje y orientado a aliviar tanto contracturas como tensiones. Combina distintas técnicas terapéuticas:</p>
+                  <ul class="incluye__lista" role="list">
+                    <li><svg aria-hidden="true"><use href="#i-termometro"/></svg><p><strong>Termoterapia y frío.</strong> Alternancia de calor y frío para preparar el músculo y reducir la inflamación.</p></li>
+                    <li><svg aria-hidden="true"><use href="#i-mano"/></svg><p><strong>Masoterapia.</strong> Técnicas manuales profundas que trabajan la musculatura en profundidad.</p></li>
+                    <li><svg aria-hidden="true"><use href="#i-diana"/></svg><p><strong>Puntos gatillo.</strong> Liberación de nudos de tensión que generan dolor referido.</p></li>
+                    <li><svg aria-hidden="true"><use href="#i-articulacion"/></svg><p><strong>Movilidad articular y estiramientos.</strong> Técnicas suaves que alivian la estructura y mejoran la movilidad.</p></li>
+                    <li><svg aria-hidden="true"><use href="#i-ventosa"/></svg><p><strong>Cupping o ventosas.</strong> Estimula la circulación y activa la fascia.</p></li>
+                    <li><svg aria-hidden="true"><use href="#i-columna"/></svg><p><strong>Ajustes articulares.</strong> Movilizaciones precisas que devuelven la libertad de movimiento a las articulaciones.</p></li>
+                  </ul>
+                </div>
+              </details>
+            </li>
+
+            <!-- Presoterapia Terra -->
+            <li class="ritual" data-ritual="presoterapia">
+              <div class="ritual__cabecera">
+                <h3 class="ritual__nombre" data-dato="presoterapia.nombre">Presoterapia Terra</h3>
+                <p class="ritual__meta"><span data-dato="presoterapia.duracion">30–40 min</span><span class="ritual__precio" data-dato="presoterapia.precio">25 €</span></p>
+              </div>
+              <p class="ritual__desc">Presoterapia neumática con tecnología Bootech®. Para piernas cansadas y sensación de pesadez. Favorece el retorno venoso y el drenaje linfático. Ideal antes o después de viajar o de hacer deporte (running, trail, ciclismo, natación).</p>
+              <div class="ritual__acciones">
+                <a class="enlace-reserva" href="#visitanos" data-enlace="booksy">Reservar<span class="sr-only"> Presoterapia Terra en Booksy</span></a>
+                <a class="enlace-whatsapp" href="#visitanos" data-enlace="whatsapp" data-mensaje-ritual="presoterapia">o pregunta por WhatsApp</a>
+              </div>
+              <p class="nota-booksy">Te llevamos a nuestra agenda en Booksy. Busca la sección Quiromasaje.</p>
+              <details class="ritual__incluye">
+                <summary>Qué incluye</summary>
+                <div class="incluye" data-incluye="presoterapia">
+                  <p class="incluye__subtitulo">La solución a tus piernas cansadas</p>
+                  <p class="incluye__intro">La presoterapia activa la circulación y drena líquidos, aliviando la pesadez y aportando ligereza y bienestar.</p>
+                  <ul class="incluye__lista" role="list">
+                    <li><svg aria-hidden="true"><use href="#i-ondas"/></svg><p><strong>Activa la circulación.</strong> Mejora el retorno venoso y la circulación sanguínea.</p></li>
+                    <li><svg aria-hidden="true"><use href="#i-gota"/></svg><p><strong>Reduce la retención de líquidos.</strong> Favorece el drenaje linfático de forma natural.</p></li>
+                    <li><svg aria-hidden="true"><use href="#i-hoja"/></svg><p><strong>Alivia la sensación de pesadez.</strong> Piernas más ligeras, relajadas y con menos hinchazón.</p></li>
+                    <li><svg aria-hidden="true"><use href="#i-mano-corazon"/></svg><p><strong>Bienestar y relajación.</strong> Favorece una sensación de descanso y equilibrio en todo el cuerpo.</p></li>
+                  </ul>
+                </div>
+              </details>
+            </li>
+
+            <!-- Combo Premium Terra -->
+            <li class="ritual ritual--destacado" data-ritual="combo">
+              <div class="ritual__cabecera">
+                <h3 class="ritual__nombre" data-dato="combo.nombre">Combo Premium Terra</h3>
+                <p class="ritual__meta"><span data-dato="combo.duracion">50 min</span><span class="ritual__precio" data-dato="combo.precio">45 €</span></p>
+              </div>
+              <p class="ritual__desc">La experiencia más completa: masaje manual (<span data-dato="esencia.corto">Esencia</span> o Reset) y presoterapia a la vez. Para salir con una profunda sensación de descanso y ligereza.</p>
+              <div class="ritual__acciones">
+                <a class="enlace-reserva" href="#visitanos" data-enlace="booksy">Reservar<span class="sr-only"> Combo Premium Terra en Booksy</span></a>
+                <a class="enlace-whatsapp" href="#visitanos" data-enlace="whatsapp" data-mensaje-ritual="combo">o pregunta por WhatsApp</a>
+              </div>
+              <p class="nota-booksy">Te llevamos a nuestra agenda en Booksy. Busca la sección Quiromasaje.</p>
+              <details class="ritual__incluye">
+                <summary>Qué incluye</summary>
+                <div class="incluye" data-incluye="combo">
+                  <p class="incluye__subtitulo">Masaje y presoterapia a la vez</p>
+                  <p class="incluye__intro">Presoterapia en piernas mientras se trabaja la parte superior del cuerpo con masaje manual.</p>
+                  <ul class="incluye__lista" role="list">
+                    <li><svg aria-hidden="true"><use href="#i-ondas"/></svg><p><strong>Presoterapia en piernas.</strong></p></li>
+                    <li><svg aria-hidden="true"><use href="#i-mano"/></svg><p><strong>Masaje manual en la parte superior del cuerpo.</strong></p></li>
+                  </ul>
+                </div>
+              </details>
+            </li>
+          </ol>
+
+          <!-- Panel fijo de escritorio: main.js copia aquí el "qué incluye" de cada ritual -->
+          <aside class="rituales__panel" aria-label="Qué incluye el ritual" data-panel></aside>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ BIENESTAR + ESTILO ============ -->
+    <section class="seccion seccion--noche combos" id="combos" aria-labelledby="combos-titulo">
+      <div class="contenedor contenedor--estrecho" data-reveal>
+        <p class="alianza">
+          <span class="alianza__terra">
+            <svg aria-hidden="true" focusable="false"><use href="#s-piedra-manos"/></svg>
+            Terra Massatge
+          </span>
+          <span class="alianza__x" aria-hidden="true">×</span><span class="sr-only">y</span>
+          <span class="alianza__loyal">
+            <!-- Monograma de JL Loyal (logo de Booksy) adaptado a una tinta cobre. Original en assets/. -->
+            <picture>
+              <source type="image/webp" srcset="assets/img/jl-monograma-cobre.webp">
+              <img class="alianza__jl" src="assets/img/jl-monograma-cobre.png" width="327" height="240" loading="lazy" decoding="async" alt="JL">
+            </picture>
+            Loyal Barber Shop
+          </span>
+        </p>
+        <h2 class="titulo" id="combos-titulo">Bienestar y estilo, en una sola visita</h2>
+        <div class="separador" aria-hidden="true"><svg><use href="#s-piedra"/></svg></div>
+        <p class="combos__intro">Porque cuidarte por fuera también empieza por sentirte bien por dentro. Combina un masaje relajante con un corte de pelo profesional en JL Loyal Barber Shop, en el mismo sitio y en la misma cita.</p>
+
+        <table class="combos__tabla">
+          <caption class="sr-only">Combos de masaje y barbería, con duración y precio</caption>
+          <thead>
+            <tr><th scope="col">Combo</th><th scope="col">Duración</th><th scope="col">Precio</th></tr>
+          </thead>
+          <tbody>
+            <tr><th scope="row">Corte + <span data-dato="express.nombre">Terra Express</span></th><td data-dato="barberia.0.duracion">1 h</td><td data-dato="barberia.0.precio">35 €</td></tr>
+            <tr><th scope="row">Corte + <span data-dato="esencia.nombre">Esencia Terra</span></th><td data-dato="barberia.1.duracion">1 h 25 min</td><td data-dato="barberia.1.precio">50 €</td></tr>
+            <tr><th scope="row">Corte y barba + <span data-dato="express.nombre">Terra Express</span></th><td data-dato="barberia.2.duracion">1 h 10 min</td><td data-dato="barberia.2.precio">38 €</td></tr>
+            <tr><th scope="row">Corte y barba + <span data-dato="esencia.nombre">Esencia Terra</span></th><td data-dato="barberia.3.duracion">1 h 35 min</td><td data-dato="barberia.3.precio">53 €</td></tr>
+          </tbody>
+        </table>
+
+        <a class="btn btn--cobre" href="#visitanos" data-enlace="booksy">Reservar un combo en Booksy</a>
+        <p class="nota-booksy">Te llevamos a nuestra agenda en Booksy. Busca la sección Quiromasaje.</p>
+      </div>
+    </section>
+
+    <!-- ============ HÉCTOR ============ -->
+    <section class="seccion seccion--papel hector" id="hector" aria-labelledby="hector-titulo">
+      <svg class="botanica botanica--izq botanica--abajo" aria-hidden="true" focusable="false"><use href="#s-rama"/></svg>
+      <div class="contenedor" data-reveal>
+        <div class="hector__grid">
+          <figure class="hector__foto foto foto--parallax">
+            <picture>
+              <source type="image/webp" srcset="assets/img/hector-800.webp 800w, assets/img/hector.webp 1229w" sizes="(min-width: 768px) 40vw, 100vw">
+              <img src="assets/img/hector-800.jpg" srcset="assets/img/hector-800.jpg 800w, assets/img/hector.jpg 1229w" sizes="(min-width: 768px) 40vw, 100vw"
+                   width="1229" height="1536" loading="lazy" decoding="async" data-parallax
+                   alt="Héctor Salom, quiromasajista y creador de Terra Massatge, sentado en la camilla de su sala, sonriendo">
+            </picture>
+          </figure>
+          <div class="hector__texto">
+            <h2 class="titulo" id="hector-titulo">Quién te cuida</h2>
+            <div class="separador separador--izq" aria-hidden="true"><svg><use href="#s-piedra"/></svg></div>
+            <p>Soy Héctor, quiromasajista y creador de Terra Massatge. Mi objetivo es que encuentres un espacio para desconectar, aliviar tensiones y sentirte realmente cuidado. Combino el trabajo manual con mi base teórico-práctica para ofrecerte una experiencia sensorial personalizada, adaptando cada sesión a lo que necesitas ese día.</p>
+            <p class="hector__cita">“Un masaje único donde doy todo de mí.”</p>
+            <p class="hector__firma">Héctor</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ A DOMICILIO Y EVENTOS ============ -->
+    <section class="eventos" id="eventos" aria-labelledby="eventos-titulo">
+      <div class="eventos__fondo foto--parallax" aria-hidden="true">
+        <picture>
+          <source type="image/webp" srcset="assets/img/eventos-800.webp 800w, assets/img/eventos.webp 1080w" sizes="100vw">
+          <img src="assets/img/eventos-800.jpg" srcset="assets/img/eventos-800.jpg 800w, assets/img/eventos.jpg 1080w" sizes="100vw"
+               width="1080" height="608" loading="lazy" decoding="async" alt="" data-parallax>
+        </picture>
+      </div>
+      <div class="contenedor eventos__contenido" data-reveal>
+        <h2 class="titulo" id="eventos-titulo">Terra también va a ti</h2>
+        <div class="eventos__bloques">
+          <div class="eventos__bloque">
+            <h3 class="eventos__subtitulo">A domicilio · desde <span data-dato="domicilio.precio">45 €</span></h3>
+            <p>Puedes elegir cualquiera de nuestros servicios. Escríbeme y llevaré el <span data-dato="esencia.nombre">Esencia Terra</span>, Terra Reset o Presoterapia hasta tu puerta, en Carcaixent, Alzira y toda La Ribera.</p>
+            <a class="btn btn--cobre" href="#visitanos" data-enlace="whatsapp" data-mensaje="Hola Héctor, me gustaría un masaje a domicilio con Terra Massatge">
+              <svg class="btn__icono" aria-hidden="true" focusable="false"><use href="#s-whatsapp"/></svg>
+              Pedir a domicilio por WhatsApp
+            </a>
+          </div>
+          <div class="eventos__bloque">
+            <h3 class="eventos__subtitulo">Eventos privados</h3>
+            <p>Masajes para celebraciones, grupos y eventos. Llevamos la experiencia Terra donde la necesites.</p>
+            <p class="eventos__nota">Presupuesto a medida según número de personas y duración.</p>
+            <a class="btn btn--linea-clara" href="#visitanos" data-enlace="whatsapp" data-mensaje="Hola Héctor, me interesa un evento privado con Terra Massatge">
+              <svg class="btn__icono" aria-hidden="true" focusable="false"><use href="#s-whatsapp"/></svg>
+              Pedir información por WhatsApp
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ OPINIONES ============
+         Fuente: ficha de Terra Massatge en Google (5,0 · 48 reseñas).
+         Reseñas escritas a mano (sin API de Google Places): se actualizan editando este HTML.
+         No usar las 312 reseñas de Booksy, que son de toda la barbería. -->
+    <section class="seccion seccion--papel opiniones" id="opiniones" aria-labelledby="opiniones-titulo">
+      <div class="contenedor" data-reveal>
+        <header class="cabecera">
+          <h2 class="titulo" id="opiniones-titulo">Lo que dicen de Terra</h2>
+          <div class="separador" aria-hidden="true"><svg><use href="#s-piedra"/></svg></div>
+        </header>
+
+        <div class="valoracion">
+          <span class="estrellas estrellas--grandes" role="img" aria-label="5 de 5 estrellas">
+            <svg><use href="#s-estrella"/></svg><svg><use href="#s-estrella"/></svg><svg><use href="#s-estrella"/></svg><svg><use href="#s-estrella"/></svg><svg><use href="#s-estrella"/></svg>
+          </span>
+          <p class="valoracion__nota">5,0</p>
+          <p class="valoracion__total">48 reseñas en Google</p>
+        </div>
+
+        <ul class="opiniones__lista" role="list" data-carrusel tabindex="0" aria-label="Reseñas de clientes">
+          <li class="opinion" id="opinion-1">
+            <span class="opinion__comillas" aria-hidden="true">«</span>
+            <blockquote><p>Una experiencia increíble. El masaje fue súper relajante y se notaba la profesionalidad y el cuidado en cada momento. Fui con un dolor de cuello que llevaba tiempo molestándome y salí muchísimo mejor, ¡me quitó el dolor! Sin duda, un sitio al que volveré y que recomiendo al 100 %. Si buscas un buen masaje, relajarte y tratar las molestias musculares, este es tu sitio. ¡Enhorabuena por el trabajo!</p></blockquote>
+            <footer class="opinion__pie">
+              <span class="opinion__autor">Cliente de Google</span><!-- [CONFIRMAR] nombre e inicial desde la ficha -->
+              <span class="estrellas" role="img" aria-label="5 de 5 estrellas"><svg><use href="#s-estrella"/></svg><svg><use href="#s-estrella"/></svg><svg><use href="#s-estrella"/></svg><svg><use href="#s-estrella"/></svg><svg><use href="#s-estrella"/></svg></span>
+              <span class="opinion__fuente">Google</span>
+            </footer>
+          </li>
+          <li class="opinion" id="opinion-2">
+            <span class="opinion__comillas" aria-hidden="true">«</span>
+            <blockquote><p>El mejor masaje que me han hecho, totalmente personalizado y bien hecho.</p></blockquote>
+            <footer class="opinion__pie">
+              <span class="opinion__autor">Cliente de Google</span><!-- [CONFIRMAR] nombre e inicial desde la ficha -->
+              <span class="estrellas" role="img" aria-label="5 de 5 estrellas"><svg><use href="#s-estrella"/></svg><svg><use href="#s-estrella"/></svg><svg><use href="#s-estrella"/></svg><svg><use href="#s-estrella"/></svg><svg><use href="#s-estrella"/></svg></span>
+              <span class="opinion__fuente">Google</span>
+            </footer>
+          </li>
+          <li class="opinion" id="opinion-3">
+            <span class="opinion__comillas" aria-hidden="true">«</span>
+            <!-- TRADUCCIÓN PROVISIONAL: sustituir por el texto original de Google -->
+            <blockquote><p>Una experiencia excelente en Terra Massatge. Héctor es un auténtico profesional: atento, respetuoso y muy hábil. Escucha lo que necesitas y adapta el masaje con precisión, aliviando la tensión y dejando una profunda sensación de bienestar. Se nota su experiencia y la pasión por su trabajo. ¡Lo recomiendo sin dudar! Muchas gracias, Héctor.</p></blockquote>
+            <footer class="opinion__pie">
+              <span class="opinion__autor">Elena <span role="img" aria-label="Suiza">🇨🇭</span></span>
+              <span class="estrellas" role="img" aria-label="5 de 5 estrellas"><svg><use href="#s-estrella"/></svg><svg><use href="#s-estrella"/></svg><svg><use href="#s-estrella"/></svg><svg><use href="#s-estrella"/></svg><svg><use href="#s-estrella"/></svg></span>
+              <span class="opinion__fuente">Google</span>
+            </footer>
+          </li>
+        </ul>
+        <div class="carrusel__puntos" data-puntos>
+          <button type="button" aria-label="Ver reseña 1" aria-controls="opinion-1" aria-current="true"></button>
+          <button type="button" aria-label="Ver reseña 2" aria-controls="opinion-2"></button>
+          <button type="button" aria-label="Ver reseña 3" aria-controls="opinion-3"></button>
+        </div>
+
+        <p class="opiniones__enlaces">
+          <a href="#visitanos" data-enlace="maps">Ver todas las reseñas</a>
+          <a href="#visitanos" data-enlace="resena">Deja tu reseña</a>
+        </p>
+      </div>
+    </section>
+
+    <!-- ============ VISÍTANOS Y RESERVA ============ -->
+    <section class="seccion seccion--papel visitanos" id="visitanos" aria-labelledby="visitanos-titulo">
+      <div class="contenedor" data-reveal>
+        <header class="cabecera">
+          <h2 class="titulo" id="visitanos-titulo">Ven a vernos</h2>
+          <div class="separador" aria-hidden="true"><svg><use href="#s-piedra"/></svg></div>
+        </header>
+
+        <div class="visitanos__grid">
+          <dl class="datos">
+            <div class="datos__fila">
+              <dt>Dirección</dt>
+              <dd>
+                <address>Calle de San Antonio, 57 <span class="datos__alt">(C. Sant Antoni, 57)</span><br>46740 Carcaixent, Valencia</address>
+                <span class="datos__nota">Dentro de JL Loyal Barber Shop.</span>
+              </dd>
+            </div>
+            <div class="datos__fila">
+              <dt>Horario</dt>
+              <dd>
+                <ul class="horario" role="list">
+                  <li><span>Lunes a viernes</span><span>9:30 – 14:30 y 16:00 – 20:00</span></li>
+                  <li><span>Sábado</span><span>9:30 – 14:30</span></li>
+                  <li><span>Domingo</span><span>Cerrado</span></li>
+                </ul>
+              </dd>
+            </div>
+            <div class="datos__fila">
+              <dt>Teléfono y WhatsApp</dt>
+              <dd><a href="#visitanos" data-enlace="telefono" data-texto="telefono">+34 694 24 01 07</a></dd>
+            </div>
+            <div class="datos__fila">
+              <dt>Pago</dt>
+              <dd>Se aceptan tarjetas.</dd>
+            </div>
+          </dl>
+
+          <div class="mapa" data-mapa>
+            <button class="mapa__fachada" type="button" data-mapa-cargar>
+              <svg aria-hidden="true" focusable="false"><use href="#s-piedra"/></svg>
+              <span>Ver mapa</span>
+              <span class="mapa__nota">Carga Google Maps</span>
+            </button>
+            <a class="mapa__enlace" href="#visitanos" data-enlace="maps">Abrir en Google Maps</a>
+          </div>
+        </div>
+
+        <div class="reserva">
+          <div class="reserva__opcion">
+            <a class="btn btn--raiz btn--grande" href="#visitanos" data-enlace="booksy">Reservar en Booksy</a>
+            <p class="nota-booksy">Te llevamos a nuestra agenda en Booksy. Busca la sección Quiromasaje.</p>
+          </div>
+          <div class="reserva__opcion">
+            <a class="btn btn--linea btn--grande" href="#visitanos" data-enlace="whatsapp">
+              <svg class="btn__icono" aria-hidden="true" focusable="false"><use href="#s-whatsapp"/></svg>
+              Escribir por WhatsApp
+            </a>
+          </div>
+        </div>
+        <p class="reserva__otros">
+          <a href="#visitanos" data-enlace="telefono">Llamar</a>
+          <span aria-hidden="true">·</span>
+          <a href="#visitanos" data-enlace="correo">Escribir a <span data-texto="correo">terramassatge [arroba] gmail.com</span></a>
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============ PIE ============ -->
+  <footer class="pie">
+    <div class="contenedor pie__grid">
+      <div class="pie__marca">
+        <svg class="pie__logo" viewBox="0 0 400 400" role="img" aria-label="Terra Massatge">
+          <circle cx="200" cy="200" r="177" fill="none" stroke="currentColor" stroke-width="6"/>
+          <use href="#s-piedra-manos" x="60" y="86" width="280" height="140"/>
+          <g fill="currentColor" font-family="Marcellus, 'Trajan Pro', Georgia, serif" text-anchor="middle">
+            <text x="200" y="287.5" font-size="64" textLength="220" lengthAdjust="spacing">TERRA</text>
+            <text x="200" y="331" font-size="41" textLength="220" lengthAdjust="spacing">MASSATGE</text>
+          </g>
+        </svg>
+        <p class="pie__eslogan" lang="ca">Repara't. Respira. Torna més fort.</p>
+      </div>
+      <div class="pie__datos">
+        <address>
+          Calle de San Antonio, 57<br>46740 Carcaixent, Valencia<br>
+          Dentro de JL Loyal Barber Shop
+        </address>
+        <p><a href="#visitanos" data-enlace="whatsapp">WhatsApp <span data-texto="telefono">+34 694 24 01 07</span></a></p>
+        <p><a href="#visitanos" data-enlace="correo" data-texto="correo">terramassatge [arroba] gmail.com</a></p>
+      </div>
+      <div class="pie__redes">
+        <p><a href="#visitanos" data-enlace="instagram">Instagram @terramassatge</a></p>
+        <p><a href="#visitanos" data-enlace="facebook">Facebook TerraMassatge</a></p>
+      </div>
+      <div class="pie__legal">
+        <p><a href="aviso-legal.html">Aviso legal</a> · <a href="privacidad.html">Política de privacidad</a></p>
+        <p>© 2026 Terra Massatge</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Botón flotante de WhatsApp (solo móvil, aparece tras el hero) -->
+  <a class="whatsapp-flotante" href="#visitanos" data-enlace="whatsapp" aria-label="Escribir por WhatsApp" data-whatsapp-flotante>
+    <svg aria-hidden="true" focusable="false"><use href="#s-whatsapp"/></svg>
+  </a>
+</body>
+</html>
