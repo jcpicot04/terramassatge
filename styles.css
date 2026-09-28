@@ -60,7 +60,7 @@
    nota Booksy                              │ ◯ Pregunta por WhatsApp      │ │ ◇ icono + texto │ │
    ◯ Pregunta por WhatsApp                  │ ─────────────                │ └ fundido cruzado ┘ │
    [▸ Qué incluye]  (acordeón <details>)    │ Terra Reset …                │
-   Orden: Esencia · Reset · Immersion · Presoterapia · Combo (borde cobre) · Express
+   Orden: Esencia · Reset · Immersion · Presoterapia · Combo · Express (todos iguales, sin destacados)
 
    Combos (negro) ──────────                ──── (columna estrecha centrada) ─────────
    ◉ Terra × JL Loyal                             BIENESTAR Y ESTILO, EN UNA SOLA VISITA
@@ -607,10 +607,6 @@ div.ritual__desc { display: grid; gap: var(--sp-1); }
 .ritual__reserva { display: grid; justify-items: start; gap: 0.4rem; margin-top: var(--sp-1); }
 .ritual__reservar { min-width: 12rem; font-size: var(--fs-0); letter-spacing: 0.12em; }
 
-.ritual--destacado {
-  padding: var(--sp-3);
-  border: 1px solid var(--terra-cobre);
-}
 
 .nota-booksy {
   font-size: var(--fs--1);
@@ -716,7 +712,6 @@ div.ritual__desc { display: grid; gap: var(--sp-1); }
     border-top: 1px solid rgb(153 115 92 / 0.3);
   }
   .ritual:first-child { border-top: 0; }
-  .ritual--destacado { padding: var(--sp-4); margin-block: var(--sp-4); }
 
   /* Con JS, el acordeón se sustituye por el panel fijo */
   .js .ritual__incluye { display: none; }
