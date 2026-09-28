@@ -27,27 +27,30 @@
   };
 
   /* Nombre confirmado: "Esencia Terra" (como en Booksy).
-     Duraciones confirmadas: las de los flyers (tiempo real de masaje);
-     Booksy indica 55 min para Esencia y Combo y 30 min para Presoterapia. */
+     Duraciones y precios: los del documento de cambios del cliente (septiembre 2026).
+     El orden de la web lo marca el HTML: Esencia, Reset, Immersion, Presoterapia, Combo, Express. */
   var RITUALES = {
-    esencia:      { nombre: 'Esencia Terra', corto: 'Esencia', duracion: '50 min de masaje', precio: 35,
+    esencia:      { nombre: 'Esencia Terra', corto: 'Esencia', duracion: '55 min', precio: 35,
                     desc: 'Masaje relajante premium de inspiración mediterránea, con toallas calientes.' },
-    express:      { nombre: 'Terra Express', duracion: '30 min', precio: 22.5,
-                    desc: 'La experiencia Esencia Terra en formato corto.' },
     reset:        { nombre: 'Terra Reset', duracion: '55 min', precio: 35,
                     desc: 'Masaje descontracturante y deportivo.' },
-    presoterapia: { nombre: 'Presoterapia Terra', duracion: '30–40 min', precio: 25,
+    immersion:    { nombre: 'Terra Immersion', duracion: '1 h 25 min', precio: 58, extra: 10,
+                    desc: 'Ritual completo sin prisas: despertar sensorial, aromaterapia, masaje completo y masaje craneofacial. Presoterapia opcional.' },
+    presoterapia: { nombre: 'Presoterapia Terra', duracion: '25–30 min', precio: 25,
                     desc: 'Presoterapia neumática con tecnología Bootech® para piernas cansadas.' },
-    combo:        { nombre: 'Combo Premium Terra', duracion: '50 min', precio: 45,
-                    desc: 'Masaje manual y presoterapia a la vez.' }
+    combo:        { nombre: 'Combo Premium Terra', duracion: '55 min', precio: 45,
+                    desc: 'Masaje manual y presoterapia a la vez.' },
+    express:      { nombre: 'Terra Express', duracion: '25–30 min', precio: 22.5,
+                    desc: 'La experiencia Terra en formato corto.' }
   };
 
   var DATOS = {
     esencia: RITUALES.esencia,
-    express: RITUALES.express,
     reset: RITUALES.reset,
+    immersion: RITUALES.immersion,
     presoterapia: RITUALES.presoterapia,
     combo: RITUALES.combo,
+    express: RITUALES.express,
     domicilio: { precio: 45 }, // se muestra como «desde 45 €»
     barberia: [
       { duracion: '1 h', precio: 35 },          // Corte + Terra Express
@@ -92,7 +95,9 @@
     var ruta = el.dataset.dato;
     var valor = leer(ruta);
     if (valor == null) return;
-    el.textContent = /\.precio$/.test(ruta) ? euros(valor) : valor;
+    if (/\.precio$/.test(ruta)) el.textContent = euros(valor);
+    else if (/\.extra$/.test(ruta)) el.textContent = '+' + euros(valor);
+    else el.textContent = valor;
   });
 
   /* ---------- Textos de contacto ---------- */
@@ -161,7 +166,7 @@
       '@context': 'https://schema.org',
       '@type': 'HealthAndBeautyBusiness',
       name: 'Terra Massatge',
-      description: 'Quiromasaje y bienestar en Carcaixent. Masaje relajante, descontracturante, deportivo y presoterapia.',
+      description: 'Masajes personalizados en Carcaixent, junto a Alzira. Masaje relajante, descontracturante, deportivo y presoterapia.',
       url: CONTACTO.web,
       image: CONTACTO.web + 'assets/og-image.jpg',
       logo: CONTACTO.web + 'assets/logo-terra.svg',
@@ -169,7 +174,8 @@
       email: correo(),
       founder: { '@type': 'Person', name: 'Héctor Salom', jobTitle: 'Quiromasajista' },
       priceRange: '€€',
-      paymentAccepted: 'Tarjeta de crédito, tarjeta de débito',
+      paymentAccepted: 'Efectivo, Bizum, Visa, Mastercard',
+      areaServed: ['Carcaixent', 'Alzira', 'La Ribera'].map(function (n) { return { '@type': 'City', name: n }; }),
       address: {
         '@type': 'PostalAddress',
         streetAddress: 'Calle de San Antonio, 57',
@@ -347,7 +353,7 @@
     p.className = 'panel' + (i === 0 ? ' es-activo' : '');
     p.dataset.ritual = r.dataset.ritual;
     var titulo = document.createElement('p');
-    titulo.className = 'panel__nombre';
+    titulo.className = 'sr-only';
     titulo.textContent = RITUALES[r.dataset.ritual].nombre;
     p.appendChild(titulo);
     p.appendChild(incluye.cloneNode(true));
@@ -365,21 +371,67 @@
     rituales.forEach(function (r) { obsRitual.observe(r); });
   }
 
-  /* ---------- Carrusel de reseñas (móvil): scroll-snap nativo + puntos ---------- */
-  var carrusel = document.querySelector('[data-carrusel]');
-  var puntos = document.querySelectorAll('[data-puntos] button');
-  var resenas = carrusel.querySelectorAll('.opinion');
-  function puntoActivo() {
-    var paso = resenas.length > 1 ? resenas[1].offsetLeft - resenas[0].offsetLeft : 1;
-    var i = Math.max(0, Math.min(resenas.length - 1, Math.round(carrusel.scrollLeft / paso)));
-    puntos.forEach(function (b, j) { b.setAttribute('aria-current', j === i ? 'true' : 'false'); });
-  }
-  carrusel.addEventListener('scroll', puntoActivo, { passive: true });
-  puntos.forEach(function (b, i) {
-    b.addEventListener('click', function () {
-      carrusel.scrollTo({ left: resenas[i].offsetLeft - resenas[0].offsetLeft, behavior: reduce ? 'auto' : 'smooth' });
+  /* ---------- Galerías de fotos (rituales y Héctor): scroll-snap nativo, nunca avanzan solas.
+     Con una sola foto no se añaden controles; con dos o más, flechas y puntos. ---------- */
+  function iniciarGaleria(g) {
+    var pista = g.querySelector('.galeria__pista');
+    var fotos = pista.children;
+    if (fotos.length < 2) return;
+    var nombre = g.getAttribute('aria-label') || 'Fotos';
+    var controles = document.createElement('div');
+    controles.className = 'galeria__controles';
+    function boton(clase, etiqueta) {
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.className = clase;
+      b.setAttribute('aria-label', etiqueta);
+      return b;
+    }
+    var anterior = boton('galeria__flecha galeria__flecha--ant', 'Foto anterior');
+    var siguiente = boton('galeria__flecha', 'Foto siguiente');
+    anterior.innerHTML = siguiente.innerHTML = '<svg aria-hidden="true" focusable="false"><use href="#s-flecha"/></svg>';
+    var puntos = document.createElement('div');
+    puntos.className = 'galeria__puntos';
+    Array.prototype.forEach.call(fotos, function (f, i) {
+      var p = boton('galeria__punto', nombre + ': foto ' + (i + 1) + ' de ' + fotos.length);
+      p.addEventListener('click', function () { ir(i); });
+      puntos.appendChild(p);
     });
-  });
+    controles.appendChild(anterior);
+    controles.appendChild(puntos);
+    controles.appendChild(siguiente);
+    g.appendChild(controles);
+
+    function actual() {
+      return Math.max(0, Math.min(fotos.length - 1, Math.round(pista.scrollLeft / Math.max(1, pista.clientWidth))));
+    }
+    function ir(i) {
+      i = (i + fotos.length) % fotos.length;
+      pista.scrollTo({ left: i * pista.clientWidth, behavior: reduce ? 'auto' : 'smooth' });
+    }
+    function marcar() {
+      var i = actual();
+      Array.prototype.forEach.call(puntos.children, function (p, j) { p.setAttribute('aria-current', j === i ? 'true' : 'false'); });
+    }
+    anterior.addEventListener('click', function () { ir(actual() - 1); });
+    siguiente.addEventListener('click', function () { ir(actual() + 1); });
+    pista.addEventListener('scroll', marcar, { passive: true });
+    marcar();
+  }
+  document.querySelectorAll('[data-galeria]').forEach(iniciarGaleria);
+
+  /* ---------- Reseñas: caja con scroll propio. La pista solo aparece si hay más de lo que se ve. ---------- */
+  var cajaResenas = document.querySelector('[data-resenas]');
+  var pistaResenas = document.querySelector('[data-resenas-pista]');
+  function comprobarResenas() {
+    var desborda = cajaResenas.scrollHeight > cajaResenas.clientHeight + 4;
+    pistaResenas.hidden = !desborda;
+    cajaResenas.classList.toggle('es-desplazable', desborda);
+    cajaResenas.classList.toggle('esta-al-final', cajaResenas.scrollTop + cajaResenas.clientHeight >= cajaResenas.scrollHeight - 4);
+  }
+  cajaResenas.addEventListener('scroll', comprobarResenas, { passive: true });
+  window.addEventListener('resize', comprobarResenas);
+  comprobarResenas();
 
   /* ---------- Mapa: se carga solo si el usuario lo pide ---------- */
   var botonMapa = document.querySelector('[data-mapa-cargar]');
@@ -400,57 +452,54 @@
      ANIMACIONES (solo con movimiento)
      ======================================================================== */
 
-  /* ---------- Hero · 1. Intro al cargar: el logo se dibuja ---------- */
-  var marca = document.querySelector('[data-marca]');
+  /* ---------- Hero · 1. Intro al cargar ----------
+     El anillo se dibuja, las manos se juntan, el montículo se posa en ellas y aparece el texto.
+     La intro anima los grupos interiores (.mano__intro, .piedra__intro, #texto y la máscara del anillo);
+     el scroll anima los exteriores (#mano-izq, #piedra, cada letra…), así no se pisan. */
   var logo = document.querySelector('[data-logo]');
-  var trazos = logo.querySelectorAll('#circulo, #manos path');
-  trazos.forEach(function (p) {
-    var largo = p.getTotalLength() + 2;
-    p.style.strokeDasharray = largo + ' ' + largo;
-    p.style.strokeDashoffset = largo;
-  });
-  gsap.set('#piedra', { autoAlpha: 0, y: -12 });
+  var trazoCirculo = logo.querySelector('[data-circulo-trazo]');
+  var largoCirculo = 2 * Math.PI * trazoCirculo.r.baseVal.value + 2;
+  trazoCirculo.style.strokeDasharray = largoCirculo + ' ' + largoCirculo;
+  trazoCirculo.style.strokeDashoffset = largoCirculo;
+  var manosIntro = logo.querySelectorAll('.mano__intro');
+  gsap.set(manosIntro[0], { x: -36, autoAlpha: 0 });
+  gsap.set(manosIntro[1], { x: 36, autoAlpha: 0 });
+  gsap.set('.piedra__intro', { autoAlpha: 0, y: -12 });
   gsap.set('#texto', { autoAlpha: 0 });
   gsap.set(logo, { visibility: 'visible' });
 
-  // Capa para el logo HD (acabado metálico real): solo en pantallas de más de 768px.
-  var capaHD = null;
-  if (window.matchMedia('(min-width: 769px)').matches) {
-    capaHD = document.createElement('span');
-    capaHD.className = 'hero__hd-capa';
-    capaHD.setAttribute('aria-hidden', 'true');
-    capaHD.innerHTML =
-      '<span class="hero__hd"><picture>' +
-      '<source type="image/webp" srcset="assets/img/logo-hd-800.webp 800w, assets/img/logo-hd.webp 1600w" sizes="400px">' +
-      '<img src="assets/img/logo-hd-800.jpg" srcset="assets/img/logo-hd-800.jpg 800w, assets/img/logo-hd.jpg 1600w" sizes="400px" alt="" decoding="async">' +
-      '</picture></span>';
-    marca.appendChild(capaHD);
-  }
-
-  function fundidoHD() {
-    if (!capaHD) return;
-    var hd = capaHD.querySelector('.hero__hd');
-    var img = hd.querySelector('img');
-    var mostrar = function () { gsap.to(hd, { opacity: 1, duration: 1.2, ease: 'sine.inOut' }); };
-    if (img.complete && img.naturalWidth) mostrar();
-    else img.addEventListener('load', mostrar, { once: true });
-  }
-
   var intro = gsap.timeline({ delay: 0.2 });
   intro
-    .to(trazos, { strokeDashoffset: 0, duration: 1.6, ease: 'power2.inOut' })
-    .to('#piedra', { autoAlpha: 1, y: 0, duration: 0.9, ease: 'power2.out' }, '-=0.15')
+    .to(trazoCirculo, { strokeDashoffset: 0, duration: 1.6, ease: 'power2.inOut' })
+    .to(manosIntro, { x: 0, autoAlpha: 1, duration: 1.4, ease: 'power2.out' }, 0.2)
+    .to('.piedra__intro', { autoAlpha: 1, y: 0, duration: 0.9, ease: 'power2.out' }, '-=0.35')
     .to('#texto', { autoAlpha: 1, duration: 0.9, ease: 'sine.inOut' }, '-=0.35')
     .fromTo('.hero__textos > *',
       { autoAlpha: 0, y: 12 },
-      { autoAlpha: 1, y: 0, duration: 0.8, ease: 'power2.out', stagger: 0.12 }, '-=0.4')
-    .add(fundidoHD, '-=0.6');
+      { autoAlpha: 1, y: 0, duration: 0.8, ease: 'power2.out', stagger: 0.12 }, '-=0.4');
   if (!deslizaOculto) {
     intro.fromTo(desliza, { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.8, ease: 'sine.inOut' }, '-=0.6');
   }
 
-  /* ---------- Hero · 2. Scroll: de la noche a la luz ---------- */
+  /* ---------- Hero · 2. Scroll: las manos se abren y dejan caer la tierra ----------
+     Coordenadas en unidades del logo (viewBox 1024). Los granos de arena se crean aquí:
+     nacen bajo el montículo, entre las manos, y caen mientras la luz sube. */
+  var SVGNS = 'http://www.w3.org/2000/svg';
+  var arena = logo.querySelector('#arena');
+  var granos = [];
+  for (var g = 0; g < 70; g++) {
+    var c = document.createElementNS(SVGNS, 'circle');
+    c.setAttribute('cx', (478 + Math.random() * 64).toFixed(1));
+    c.setAttribute('cy', (462 + Math.random() * 40).toFixed(1));
+    c.setAttribute('r', (1.4 + Math.random() * 2.6).toFixed(1));
+    c.setAttribute('fill', 'currentColor');
+    c.setAttribute('opacity', '0');
+    arena.appendChild(c);
+    granos.push(c);
+  }
+
   var salida = gsap.timeline({
+    defaults: { immediateRender: false },
     scrollTrigger: {
       trigger: hero,
       start: 'top top',
@@ -461,11 +510,29 @@
     }
   });
   salida
-    .to(marca, { scale: 0.6, yPercent: -10, ease: 'none', duration: 1 }, 0)
-    .to('.hero__textos', { autoAlpha: 0, y: -24, ease: 'none', duration: 0.45 }, 0)
+    .fromTo('.hero__textos', { autoAlpha: 1, y: 0 }, { autoAlpha: 0, y: -24, ease: 'none', duration: 0.3 }, 0)
+    // Las manos se separan y se inclinan hacia fuera, como al abrirse
+    .fromTo('#mano-izq', { x: 0, y: 0, rotation: 0 }, { x: -120, y: 26, rotation: 16, svgOrigin: '330 430', ease: 'sine.inOut', duration: 0.7 }, 0.08)
+    .fromTo('#mano-der', { x: 0, y: 0, rotation: 0 }, { x: 120, y: 26, rotation: -16, svgOrigin: '694 430', ease: 'sine.inOut', duration: 0.7 }, 0.08)
+    .fromTo('#manos', { autoAlpha: 1 }, { autoAlpha: 0, ease: 'none', duration: 0.3 }, 0.48)
+    // El montículo cae por el hueco y se deshace
+    .fromTo('#piedra', { y: 0, scaleX: 1, scaleY: 1, autoAlpha: 1 },
+      { y: 230, scaleX: 0.7, scaleY: 0.45, svgOrigin: '510 495', autoAlpha: 0, ease: 'power1.in', duration: 0.5 }, 0.2)
+    // El texto se abre hacia los lados y se desvanece; el anillo se expande y se apaga
+    .fromTo('#circulo', { scale: 1, autoAlpha: 1 }, { scale: 1.12, svgOrigin: '512 512', autoAlpha: 0, ease: 'none', duration: 0.5 }, 0.12)
     .fromTo('.hero__luz', { yPercent: 0 }, { yPercent: -100, ease: 'sine.inOut', duration: 1 }, 0);
-  // Sobre el papel se ve el logo plano: el HD (con su fondo negro) se desvanece al empezar a subir la luz.
-  if (capaHD) salida.to(capaHD, { opacity: 0, ease: 'none', duration: 0.4 }, 0.1);
+  logo.querySelectorAll('.logo__letra').forEach(function (letra) {
+    var dx = (Number(letra.dataset.cx) - 512) * 0.9;
+    salida.fromTo(letra, { x: 0, autoAlpha: 1 }, { x: dx, autoAlpha: 0, ease: 'sine.in', duration: 0.45 }, 0);
+  });
+  granos.forEach(function (grano) {
+    var inicio = 0.18 + Math.random() * 0.42;
+    var caida = 240 + Math.random() * 420;
+    salida
+      .fromTo(grano, { x: 0, y: 0, opacity: 0 }, { x: (Math.random() - 0.5) * 60, y: caida, ease: 'power1.in', duration: 0.34 }, inicio)
+      .to(grano, { opacity: 0.9, ease: 'none', duration: 0.05 }, inicio)
+      .to(grano, { opacity: 0, ease: 'none', duration: 0.12 }, inicio + 0.22);
+  });
 
   /* ---------- Entradas de sección: una vez por sección ---------- */
   gsap.utils.toArray('[data-reveal]').forEach(function (el) {

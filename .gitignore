@@ -2,6 +2,9 @@
 /*.jpg
 /*.jpeg
 /assets/*.jpeg
+/*.docx
+/*.eps
+/*.ai
 
 # Notas internas: Netlify publica todo el repositorio
 PENDIENTES.md

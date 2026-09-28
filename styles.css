@@ -42,23 +42,25 @@
    │  Quiromasaje y bien... │               │   Quiromasaje y bienestar en ...      │
    │   [Reservar ritual]    │               │         [Reservar tu ritual]          │
    │         │ desliza      │               │                 │                     │
-   → scroll: logo sube/encoge, textos se van, luz papel sube desde abajo
+   → scroll: las manos se abren, la tierra cae como arena, el texto y el anillo se disipan; sube la luz
 
    Qué es Terra (papel) ────                ────────────────────────────────────────
-   UN ESPACIO PARA PARAR                    🌿 │ UN ESPACIO PARA PARAR   │  🌿 ramas  │
-   ──── ◆ ────                                 │ texto…                  │  de olivo  │
-   texto…                                      │                         │  + piedra  │
-   (ilustración botánica, sin foto)            ├── 🌿Relajante ─ 🌿Descontr. ─ 🌿Deport.
-   🌿 Relajante / Descontr. / Deportivo
+   UN ESPACIO PARA PARAR                    🌿 │ UN ESPACIO PARA PARAR   │  ⌒ arco    │
+   ──── ◆ ────                                 │ entradilla (Carcaixent, │  brote que │
+   entradilla + texto…                         │ junto a Alzira) + texto │  nace de la│
+   (arco + brote + manos, sin foto)            │                         │  tierra    │
+   🌿 Relajante / Descontr.-deport. / Privadas  ├── lavanda ─ olivo ─ eucalipto (+ WhatsApp)
 
    Rituales (papel) ────────                ────────────────────────────────────────
-   RITUALES TERRA                           RITUALES TERRA
-   Esencia Terra   50′ · 35 €               │ Esencia Terra  50 min · 35 € │ ┌ panel sticky ───┐ │
-   desc…                                    │ desc…                        │ │ subtítulo       │ │
-   Reservar →  o pregunta por WhatsApp      │ Reservar → · WhatsApp        │ │ intro           │ │
-   nota Booksy                              │ nota Booksy                  │ │ ◇ icono + texto │ │
-   [▸ Qué incluye]  (acordeón <details>)    │ ─────────────                │ │ ◇ icono + texto │ │
-   ┌ Combo Premium (borde cobre) ┐          │ Terra Reset …                │ └ fundido cruzado ┘ │
+   RITUALES TERRA                           RITUALES TERRA · «frase en cursiva»
+   «frase en cursiva»                       │ Esencia Terra  55 min · 35 € │ ┌ panel sticky ───┐ │
+   Esencia Terra   55′ · 35 €               │ desc…                        │ │ [galería fotos] │ │
+   desc…                                    │ [RESERVAR]                   │ │ subtítulo       │ │
+   [RESERVAR]                               │ nota Booksy                  │ │ ◇ icono + texto │ │
+   nota Booksy                              │ ◯ Pregunta por WhatsApp      │ │ ◇ icono + texto │ │
+   ◯ Pregunta por WhatsApp                  │ ─────────────                │ └ fundido cruzado ┘ │
+   [▸ Qué incluye]  (acordeón <details>)    │ Terra Reset …                │
+   Orden: Esencia · Reset · Immersion · Presoterapia · Combo (borde cobre) · Express
 
    Combos (negro) ──────────                ──── (columna estrecha centrada) ─────────
    ◉ Terra × JL Loyal                             BIENESTAR Y ESTILO, EN UNA SOLA VISITA
@@ -77,12 +79,13 @@
 
    Opiniones (papel) ───────                ────────────────────────────────────────
    ★★★★★ 5,0 · 48 reseñas en Google          ★★★★★  5,0  48 reseñas en Google
-   ‹ carrusel scroll-snap › ● ○ ○           │ « reseña │ « reseña │ « reseña │
+   ┌ caja con scroll propio ┐               ┌──── caja centrada, scroll propio ────┐
+   │ « reseña / « reseña ↓  │               │ « reseña                              │
    Ver todas · Deja tu reseña                     Ver todas · Deja tu reseña
 
    Visítanos (papel) ───────                ────────────────────────────────────────
-   VEN A VERNOS                             VEN A VERNOS
-   Dirección / Horario / Tel / Pago         │ datos + horario       │ [ mapa (clic) ] │
+   DÓNDE ENCONTRAR EL TEMPLO DEL MASAJE     DÓNDE ENCONTRAR EL TEMPLO DEL MASAJE
+   Dirección / Horario / Contacto / Pago        │ datos + horario       │ [ mapa (clic) ] │
    [mapa (clic para cargar)]                │ [Reservar en Booksy] [WhatsApp]         │
    [Reservar en Booksy] + nota              │ Llamar · Escribir un correo             │
    [Escribir por WhatsApp]
@@ -175,6 +178,7 @@ html.lenis, html.lenis body { height: auto; }
 }
 
 .sprite { position: absolute; width: 0; height: 0; overflow: hidden; }
+.nav__piedra, .alianza__terra svg, .terra__manos { fill: currentColor; }
 
 .saltar {
   position: fixed; left: var(--gutter); top: -100px; z-index: 100;
@@ -244,7 +248,10 @@ p + p { margin-top: var(--sp-2); }
 .separador svg { width: 18px; height: 13px; flex: none; }
 .separador--izq { margin-left: 0; }
 
-/* Ilustraciones botánicas en los márgenes */
+/* Ilustraciones botánicas en los márgenes.
+   Reglas para que haya variedad sin desorden: una sola planta por sección, siempre en el borde,
+   alternando lados (izq · der · izq…), misma escala, opacidad y trazo de 1px.
+   Especies: olivo (s-rama), eucalipto, lavanda, ramita y el brote de la ilustración. */
 .botanica {
   position: absolute;
   width: 120px; height: 320px;
@@ -306,12 +313,13 @@ p + p { margin-top: var(--sp-2); }
 .enlace-reserva:hover::after { transform: translateX(4px); }
 
 .enlace-whatsapp {
-  display: inline-flex; align-items: center;
+  display: inline-flex; align-items: center; gap: 0.55em;
   min-height: 44px;
   font-size: var(--fs--1);
   text-underline-offset: 4px;
   text-decoration-color: var(--terra-bronce);
 }
+.enlace-whatsapp__icono { width: 20px; height: 20px; flex: none; color: var(--terra-bronce); }
 .menu-movil .nota-booksy { max-width: 22rem; text-align: center; }
 .combos .nota-booksy { margin-top: var(--sp-2); color: var(--terra-arena); }
 .btn { text-align: center; }
@@ -457,22 +465,7 @@ p + p { margin-top: var(--sp-2); }
   aspect-ratio: 1;
   will-change: transform;
 }
-.hero__logo { display: block; width: 100%; height: 100%; color: var(--terra-cobre); }
-
-/* Logo HD (acabado metálico real): solo >768px, lo inserta main.js tras el dibujo.
-   Recortado en círculo al borde exterior del anillo y alineado con el SVG. */
-.hero__hd-capa { position: absolute; inset: 0; pointer-events: none; }
-.hero__hd {
-  position: absolute; inset: 0;
-  clip-path: circle(45.3% at 50% 50%);
-  opacity: 0;
-  pointer-events: none;
-}
-.hero__hd img {
-  position: absolute;
-  width: 105.46%; max-width: none; height: auto;
-  left: -3.22%; top: -2.85%;
-}
+.hero__logo { display: block; width: 100%; height: 100%; color: var(--terra-cobre); fill: currentColor; overflow: visible; }
 
 .hero__textos { display: grid; justify-items: center; gap: var(--sp-2); }
 .hero__eslogan {
@@ -519,26 +512,22 @@ p + p { margin-top: var(--sp-2); }
 .terra__grid { display: grid; gap: var(--sp-5); }
 .terra__texto .titulo { text-align: center; }
 .terra__texto p { margin-inline: auto; }
+.terra__entradilla { font-size: var(--fs-1); font-weight: 400; line-height: 1.5; }
 
-/* Ilustración botánica en lugar de la foto de la sala (pendiente) */
+/* Ilustración en lugar de la foto de la sala (pendiente): la tierra en las manos del logo,
+   de la que brota una rama, bajo un arco mediterráneo. Una sola composición, centrada. */
 .terra__ilustracion {
-  position: relative;
-  width: min(100%, 22rem);
+  display: block;
+  width: min(100%, 20rem);
+  height: auto;
   aspect-ratio: 4 / 5;
   margin-inline: auto;
-  color: var(--terra-salvia);
 }
-.terra__rama { position: absolute; width: 46%; height: 88%; }
-.terra__rama--a { left: 14%; top: 0; transform: rotate(-14deg); opacity: 0.75; }
-.terra__rama--b { right: 12%; top: 8%; transform: scaleX(-1) rotate(-10deg); opacity: 0.5; color: var(--terra-bronce); }
-.terra__piedra {
-  position: absolute; left: 22%; bottom: 4%;
-  width: 56%; height: 28%;
-  color: var(--terra-bronce);
-}
+.terra__arco { fill: none; stroke: var(--terra-bronce); stroke-width: 1; opacity: 0.55; }
+.terra__brote { color: var(--terra-salvia); overflow: visible; }
+.terra__manos { color: var(--terra-bronce); }
 @media (max-width: 767px) {
-  .terra__ilustracion { width: 12rem; aspect-ratio: 1; }
-  .terra__piedra { bottom: 0; }
+  .terra__ilustracion { width: 11rem; }
 }
 
 .ideas {
@@ -558,6 +547,7 @@ p + p { margin-top: var(--sp-2); }
   color: var(--terra-salvia);
   opacity: 0.8;
 }
+.idea .enlace-whatsapp { margin-top: 0.25rem; }
 .idea__titulo {
   font-family: var(--f-display);
   font-weight: 400;
@@ -577,6 +567,15 @@ p + p { margin-top: var(--sp-2); }
 /* =============================================================================
    RITUALES
    ========================================================================== */
+.rituales__frase {
+  max-width: 34rem;
+  margin: calc(-1 * var(--sp-2)) auto 0;
+  font-family: var(--f-display);
+  font-size: var(--fs-1);
+  font-style: italic;
+  line-height: 1.45;
+  text-wrap: balance;
+}
 .rituales__lista { list-style: none; padding: 0; display: grid; gap: var(--sp-5); }
 .ritual { display: grid; gap: var(--sp-2); justify-items: start; }
 .ritual__cabecera {
@@ -596,7 +595,17 @@ p + p { margin-top: var(--sp-2); }
 .ritual__meta > span:first-child { font-size: var(--fs--1); letter-spacing: 0.08em; text-transform: uppercase; }
 .ritual__precio { font-family: var(--f-display); font-size: var(--fs-2); }
 .ritual__desc { max-width: 58ch; }
-.ritual__acciones { display: flex; flex-wrap: wrap; align-items: center; gap: 0 var(--sp-3); }
+div.ritual__desc { display: grid; gap: var(--sp-1); }
+.ritual__extra {
+  margin-top: -0.4rem;
+  font-size: var(--fs--1);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* Llamada a reservar en dos filas: [Reservar] + nota de Booksy · WhatsApp debajo */
+.ritual__reserva { display: grid; justify-items: start; gap: 0.4rem; margin-top: var(--sp-1); }
+.ritual__reservar { min-width: 12rem; font-size: var(--fs-0); letter-spacing: 0.12em; }
 
 .ritual--destacado {
   padding: var(--sp-3);
@@ -609,7 +618,6 @@ p + p { margin-top: var(--sp-2); }
   font-style: italic;
   opacity: 0.9;
 }
-.ritual .nota-booksy { margin-top: -0.4rem; }
 
 /* Acordeón "Qué incluye" (móvil y sin JS) */
 .ritual__incluye { width: 100%; border-top: 1px solid rgb(153 115 92 / 0.3); }
@@ -636,8 +644,47 @@ p + p { margin-top: var(--sp-2); }
 /* Contenido "qué incluye" (compartido por acordeón y panel) */
 .incluye { display: grid; gap: var(--sp-2); }
 .incluye p + p { margin-top: 0; }
-.incluye__foto { display: block; aspect-ratio: 1536 / 584; overflow: hidden; background: var(--terra-arena); }
-.incluye__foto img { width: 100%; height: 100%; object-fit: cover; }
+.incluye__opcional { display: block; font-style: italic; }
+.sin-corte { white-space: nowrap; }
+
+/* Galería de fotos (rituales y Héctor): una foto por vista, scroll-snap nativo, sin autoplay */
+.galeria { position: relative; }
+.galeria__pista {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  overscroll-behavior-x: contain;
+  scrollbar-width: none;
+}
+.galeria__pista::-webkit-scrollbar { display: none; }
+.galeria__foto {
+  flex: 0 0 100%;
+  scroll-snap-align: start;
+  aspect-ratio: 16 / 7;
+  overflow: hidden;
+  background: var(--terra-arena);
+}
+.galeria__foto picture { display: block; height: 100%; }
+.galeria__foto img { width: 100%; height: 100%; object-fit: cover; }
+.galeria__controles { display: flex; align-items: center; justify-content: center; }
+.galeria__flecha,
+.galeria__punto {
+  display: grid; place-items: center;
+  width: 44px; height: 44px;
+  padding: 0; border: 0; background: none; color: var(--terra-raiz); cursor: pointer;
+}
+.galeria__flecha svg { width: 20px; height: 20px; }
+.galeria__flecha--ant svg { transform: scaleX(-1); }
+.galeria__puntos { display: flex; }
+.galeria__punto { width: 28px; }
+.galeria__punto::before {
+  content: ""; width: 7px; height: 7px; border-radius: 50%;
+  border: 1px solid var(--terra-raiz);
+  transition: background-color 0.3s var(--ease);
+}
+.galeria__punto[aria-current="true"]::before { background: var(--terra-raiz); }
+.galeria--retrato .galeria__foto { aspect-ratio: 4 / 5; }
+.galeria__foto.foto--parallax img { height: calc(100% + 48px); margin-top: -24px; }
 .incluye__subtitulo {
   font-family: var(--f-display);
   font-size: var(--fs-1);
@@ -696,20 +743,18 @@ p + p { margin-top: var(--sp-2); }
   }
   .panel .incluye { gap: var(--sp-1); font-size: 0.94rem; line-height: 1.5; }
   .panel .incluye__lista { gap: var(--sp-1); }
-  .panel .incluye__foto { aspect-ratio: 16 / 5; }
+  /* La foto se ajusta a la altura de la pantalla para que quepa entera junto con la lista */
+  .panel .galeria__foto { aspect-ratio: auto; height: clamp(8rem, 100vh - 38rem, 16rem); }
+  .panel .galeria__controles { margin-bottom: calc(-1 * var(--sp-1)); }
 }
 @media (min-width: 1024px) and (max-height: 820px) {
-  /* En pantallas bajas el panel no cabe con la foto: se queda solo el texto */
-  .panel .incluye__foto { display: none; }
+  .panel { padding-block: var(--sp-2); }
+  .panel .incluye { font-size: 0.9rem; line-height: 1.45; }
+  .panel .incluye__lista { gap: 0.4rem; }
 }
-@media (min-width: 1024px) {
-  .panel__nombre {
-    font-family: var(--f-display);
-    font-size: var(--fs--1);
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    margin-bottom: var(--sp-2);
-  }
+@media (min-width: 1024px) and (max-height: 700px) {
+  /* En pantallas muy bajas el panel no cabe con la foto: se queda solo el texto */
+  .panel .galeria { display: none; }
 }
 
 /* =============================================================================
@@ -777,7 +822,7 @@ p + p { margin-top: var(--sp-2); }
    ========================================================================== */
 .hector__grid { display: grid; gap: var(--sp-5); }
 .hector__foto { aspect-ratio: 4 / 5; max-width: 26rem; width: 100%; margin-inline: auto; }
-.hector__foto picture { display: block; height: 100%; }
+.hector__foto .galeria__foto { background: var(--terra-arena); }
 .hector__cita {
   margin-top: var(--sp-3);
   font-style: italic;
@@ -849,29 +894,38 @@ p + p { margin-top: var(--sp-2); }
 .valoracion__nota { font-family: var(--f-display); font-size: var(--fs-4); line-height: 1.1; }
 .valoracion__total { font-size: var(--fs--1); letter-spacing: 0.08em; text-transform: uppercase; }
 
-/* Móvil: carrusel nativo con scroll-snap (nunca avanza solo) */
-.opiniones__lista {
-  display: grid;
-  grid-auto-flow: column;
-  grid-auto-columns: 86%;
-  gap: var(--sp-3);
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  overscroll-behavior-x: contain;
-  scrollbar-width: none;
-  margin-inline: calc(-1 * var(--gutter));
-  padding-inline: var(--gutter);
-  scroll-padding-inline: var(--gutter);
+/* Caja cerrada con scroll propio: se leen más reseñas sin salir a Google Maps */
+.opiniones__caja {
+  position: relative;
+  max-width: 46rem;
+  max-height: min(34rem, 70vh);
+  margin-inline: auto;
+  padding: 0 var(--sp-3);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  border-block: 1px solid rgb(153 115 92 / 0.5);
   text-align: left;
+  scrollbar-width: thin;
+  scrollbar-color: var(--terra-bronce) transparent;
 }
-.opiniones__lista::-webkit-scrollbar { display: none; }
+.opiniones__caja::-webkit-scrollbar { width: 6px; }
+.opiniones__caja::-webkit-scrollbar-thumb { background: var(--terra-bronce); border-radius: 3px; }
+/* Velo inferior que sugiere que hay más (se quita al llegar al final) */
+.opiniones__caja.es-desplazable::after {
+  content: ""; position: sticky; bottom: 0; display: block;
+  height: 3.5rem; margin-top: -3.5rem;
+  background: linear-gradient(to bottom, rgb(237 228 216 / 0), var(--terra-papel));
+  pointer-events: none;
+  transition: opacity 0.4s var(--ease);
+}
+.opiniones__caja.esta-al-final::after { opacity: 0; }
 .opinion {
   position: relative;
-  scroll-snap-align: start;
   display: grid; align-content: start; gap: var(--sp-2);
-  padding: var(--sp-5) 0 var(--sp-2);
-  border-top: 1px solid rgb(153 115 92 / 0.5);
+  padding: var(--sp-5) 0 var(--sp-4);
 }
+.opinion + .opinion { border-top: 1px solid rgb(153 115 92 / 0.3); }
+.opiniones__pista { margin: var(--sp-2) auto 0; font-size: var(--fs--1); font-style: italic; }
 .opinion__comillas {
   position: absolute; top: -0.1em; left: 0;
   font-family: var(--f-display);
@@ -884,19 +938,6 @@ p + p { margin-top: var(--sp-2); }
 .opinion__autor { font-family: var(--f-display); font-size: var(--fs-1); width: 100%; }
 .opinion__fuente { font-size: var(--fs--1); letter-spacing: 0.08em; text-transform: uppercase; }
 
-.carrusel__puntos { display: flex; justify-content: center; gap: 0.25rem; margin-top: var(--sp-2); }
-.carrusel__puntos button {
-  width: 44px; height: 44px;
-  padding: 0; border: 0; background: none; cursor: pointer;
-  display: grid; place-items: center;
-}
-.carrusel__puntos button::before {
-  content: ""; width: 8px; height: 8px; border-radius: 50%;
-  border: 1px solid var(--terra-raiz);
-  transition: background-color 0.3s var(--ease);
-}
-.carrusel__puntos button[aria-current="true"]::before { background: var(--terra-raiz); }
-
 .opiniones__enlaces { display: flex; flex-wrap: wrap; justify-content: center; gap: 0 var(--sp-4); margin: var(--sp-4) auto 0; }
 .opiniones__enlaces a {
   display: inline-flex; align-items: center; min-height: 44px;
@@ -905,14 +946,7 @@ p + p { margin-top: var(--sp-2); }
 }
 
 @media (min-width: 768px) {
-  .opiniones__lista {
-    grid-auto-flow: row;
-    grid-template-columns: repeat(3, 1fr);
-    gap: var(--sp-5);
-    overflow: visible;
-    margin-inline: 0; padding-inline: 0;
-  }
-  .carrusel__puntos { display: none; }
+  .opiniones__caja { padding-inline: var(--sp-5); }
 }
 
 /* =============================================================================
@@ -983,7 +1017,7 @@ p + p { margin-top: var(--sp-2); }
   font-size: var(--fs--1);
 }
 .pie__grid { display: grid; gap: var(--sp-4); text-align: center; justify-items: center; }
-.pie__logo { width: 96px; height: 96px; color: var(--terra-cobre); }
+.pie__logo { display: block; width: 96px; height: 96px; color: var(--terra-cobre); fill: currentColor; }
 .pie__eslogan { margin-top: var(--sp-2); font-family: var(--f-display); font-size: var(--fs-0); font-style: italic; color: var(--terra-cobre); }
 .pie a { display: inline-block; padding-block: 12px; line-height: 20px; text-decoration-color: var(--terra-bronce); text-underline-offset: 3px; }
 .pie p { margin-inline: auto; }
@@ -1048,8 +1082,7 @@ p + p { margin-top: var(--sp-2); }
     scroll-behavior: auto !important;
   }
   .hero__desliza-linea { transform: none; opacity: 0.8; }
-  .foto--parallax img, .eventos__fondo img { height: 100%; margin-top: 0; }
-  .hero__hd { display: none; }
+  .foto--parallax img, .galeria__foto.foto--parallax img, .eventos__fondo img { height: 100%; margin-top: 0; }
 }
 
 /* =============================================================================
@@ -1062,7 +1095,7 @@ p + p { margin-top: var(--sp-2); }
 }
 .legal-cabecera .contenedor { display: flex; align-items: center; justify-content: space-between; gap: var(--sp-2); }
 .legal-cabecera a { display: inline-flex; align-items: center; gap: 0.6rem; min-height: 44px; text-decoration: none; }
-.legal-cabecera svg { width: 38px; height: 19px; color: var(--terra-cobre); }
+.legal-cabecera__logo { width: 38px; height: 20px; }
 .legal {
   padding-block: var(--sp-6);
   max-width: calc(46rem + 2 * var(--gutter));
