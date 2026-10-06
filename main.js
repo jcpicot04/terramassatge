@@ -468,15 +468,15 @@
   gsap.set('#texto', { autoAlpha: 0 });
   gsap.set(logo, { visibility: 'visible' });
 
-  var intro = gsap.timeline({ delay: 0.2 });
+  var intro = gsap.timeline({ delay: 0.1 });
   intro
-    .to(trazoCirculo, { strokeDashoffset: 0, duration: 1.6, ease: 'power2.inOut' })
-    .to(manosIntro, { x: 0, autoAlpha: 1, duration: 1.4, ease: 'power2.out' }, 0.2)
-    .to('.piedra__intro', { autoAlpha: 1, y: 0, duration: 0.9, ease: 'power2.out' }, '-=0.35')
-    .to('#texto', { autoAlpha: 1, duration: 0.9, ease: 'sine.inOut' }, '-=0.35')
+    .to(trazoCirculo, { strokeDashoffset: 0, duration: 1.1, ease: 'power2.inOut' })
+    .to(manosIntro, { x: 0, autoAlpha: 1, duration: 0.9, ease: 'power2.out' }, 0.1)
+    .to('.piedra__intro', { autoAlpha: 1, y: 0, duration: 0.6, ease: 'power2.out' }, '-=0.3')
+    .to('#texto', { autoAlpha: 1, duration: 0.6, ease: 'sine.inOut' }, '-=0.3')
     .fromTo('.hero__textos > *',
       { autoAlpha: 0, y: 12 },
-      { autoAlpha: 1, y: 0, duration: 0.8, ease: 'power2.out', stagger: 0.12 }, '-=0.4');
+      { autoAlpha: 1, y: 0, duration: 0.6, ease: 'power2.out', stagger: 0.08 }, '-=0.4');
   if (!deslizaOculto) {
     intro.fromTo(desliza, { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.8, ease: 'sine.inOut' }, '-=0.6');
   }
@@ -503,7 +503,7 @@
     scrollTrigger: {
       trigger: hero,
       start: 'top top',
-      end: '+=150%',
+      end: '+=80%',
       pin: true,
       scrub: true,
       anticipatePin: 1
