@@ -184,6 +184,13 @@
   <main id="contenido">
     <!-- ============ HERO ============ -->
     <section class="hero" id="inicio" data-hero>
+      <div class="hero__video" aria-hidden="true">
+        <!-- Loop de ambiente, sin audio. Con movimiento reducido o sin vídeo se queda el póster (main.js). -->
+        <video muted loop playsinline preload="auto" poster="assets/video/hero-poster.jpg" data-hero-video>
+          <source src="assets/video/hero-loop.webm" type="video/webm">
+          <source src="assets/video/hero-loop.mp4" type="video/mp4">
+        </video>
+      </div>
       <div class="hero__luz" aria-hidden="true"></div>
       <div class="hero__contenido">
         <h1 class="hero__titulo">
@@ -301,7 +308,18 @@
               <details class="ritual__incluye">
                 <summary>Qué incluye</summary>
                 <div class="incluye" data-incluye="esencia">
-                  <!-- [PENDIENTE] Galería de fotos de Esencia Terra (3 o 4 fotos) -->
+                  <div class="galeria" data-galeria role="group" aria-roledescription="carrusel" aria-label="Fotos de Esencia Terra">
+                    <div class="galeria__pista">
+                      <figure class="galeria__foto">
+                        <picture>
+                          <source type="image/webp" srcset="assets/img/ritual-esencia-800.webp 800w, assets/img/ritual-esencia.webp 1600w" sizes="(min-width: 1024px) 40vw, 100vw">
+                          <img src="assets/img/ritual-esencia-800.jpg" srcset="assets/img/ritual-esencia-800.jpg 800w, assets/img/ritual-esencia.jpg 1600w" sizes="(min-width: 1024px) 40vw, 100vw"
+                               width="1600" height="700" loading="lazy" decoding="async"
+                               alt="Héctor vierte aceite de masaje sobre la espalda de un cliente mientras desliza la otra mano por ella">
+                        </picture>
+                      </figure>
+                    </div>
+                  </div>
                   <p class="incluye__subtitulo">Masaje relajante premium</p>
                   <p class="incluye__intro">Un masaje pensado para desconectar del mundo y reconectar contigo mismo. Una experiencia profunda de relajación y autoconocimiento.</p>
                   <ul class="incluye__lista" role="list">
@@ -339,10 +357,10 @@
                     <div class="galeria__pista">
                       <figure class="galeria__foto">
                         <picture>
-                          <source type="image/webp" srcset="assets/img/ritual-reset-800.webp 800w, assets/img/ritual-reset.webp 1536w" sizes="(min-width: 1024px) 40vw, 100vw">
-                          <img src="assets/img/ritual-reset-800.jpg" srcset="assets/img/ritual-reset-800.jpg 800w, assets/img/ritual-reset.jpg 1536w" sizes="(min-width: 1024px) 40vw, 100vw"
-                               width="1536" height="584" loading="lazy" decoding="async"
-                               alt="Héctor estira la pierna de un cliente tumbado boca abajo durante un masaje Terra Reset">
+                          <source type="image/webp" srcset="assets/img/ritual-reset-nuevo-800.webp 800w, assets/img/ritual-reset-nuevo.webp 1600w" sizes="(min-width: 1024px) 40vw, 100vw">
+                          <img src="assets/img/ritual-reset-nuevo-800.jpg" srcset="assets/img/ritual-reset-nuevo-800.jpg 800w, assets/img/ritual-reset-nuevo.jpg 1600w" sizes="(min-width: 1024px) 40vw, 100vw"
+                               width="1600" height="700" loading="lazy" decoding="async"
+                               alt="Héctor, con diadema, se inclina sobre la espalda de un cliente tumbado durante un masaje Terra Reset">
                         </picture>
                       </figure>
                     </div>
@@ -385,7 +403,18 @@
               <details class="ritual__incluye">
                 <summary>Qué incluye</summary>
                 <div class="incluye" data-incluye="immersion">
-                  <!-- [PENDIENTE] Galería de fotos de Terra Immersion -->
+                  <div class="galeria" data-galeria role="group" aria-roledescription="carrusel" aria-label="Fotos de Terra Immersion">
+                    <div class="galeria__pista">
+                      <figure class="galeria__foto">
+                        <picture>
+                          <source type="image/webp" srcset="assets/img/ritual-immersion-800.webp 800w, assets/img/ritual-immersion.webp 1600w" sizes="(min-width: 1024px) 40vw, 100vw">
+                          <img src="assets/img/ritual-immersion-800.jpg" srcset="assets/img/ritual-immersion-800.jpg 800w, assets/img/ritual-immersion.jpg 1600w" sizes="(min-width: 1024px) 40vw, 100vw"
+                               width="1600" height="700" loading="lazy" decoding="async"
+                               alt="Héctor sostiene un cuenco tibetano dorado sobre la espalda de un cliente tumbado en la camilla">
+                        </picture>
+                      </figure>
+                    </div>
+                  </div>
                   <p class="incluye__subtitulo">Un ritual sin prisas</p>
                   <ul class="incluye__lista" role="list">
                     <li><svg aria-hidden="true"><use href="#i-reloj-arena"/></svg><p><strong>Duración extendida.</strong> Para que el tiempo se pare y el ritual perdure.</p></li>
@@ -415,7 +444,18 @@
               <details class="ritual__incluye">
                 <summary>Qué incluye</summary>
                 <div class="incluye" data-incluye="presoterapia">
-                  <!-- [PENDIENTE] Galería de fotos de presoterapia (con las botas puestas) -->
+                  <div class="galeria" data-galeria role="group" aria-roledescription="carrusel" aria-label="Fotos de Presoterapia Terra">
+                    <div class="galeria__pista">
+                      <figure class="galeria__foto">
+                        <picture>
+                          <source type="image/webp" srcset="assets/img/ritual-presoterapia-800.webp 800w, assets/img/ritual-presoterapia.webp 1600w" sizes="(min-width: 1024px) 40vw, 100vw">
+                          <img src="assets/img/ritual-presoterapia-800.jpg" srcset="assets/img/ritual-presoterapia-800.jpg 800w, assets/img/ritual-presoterapia.jpg 1600w" sizes="(min-width: 1024px) 40vw, 100vw"
+                               width="1600" height="700" loading="lazy" decoding="async"
+                               alt="Héctor masajea con ambas manos la pierna de un cliente tumbado, con la piel cuidada con aceite">
+                        </picture>
+                      </figure>
+                    </div>
+                  </div>
                   <p class="incluye__subtitulo">La solución a tus piernas cansadas</p>
                   <p class="incluye__intro">La presoterapia activa la circulación y drena líquidos, aliviando la pesadez y aportando ligereza y bienestar.</p>
                   <ul class="incluye__lista" role="list">
@@ -446,7 +486,18 @@
               <details class="ritual__incluye">
                 <summary>Qué incluye</summary>
                 <div class="incluye" data-incluye="combo">
-                  <!-- [PENDIENTE] Galería de fotos del Combo Premium -->
+                  <div class="galeria" data-galeria role="group" aria-roledescription="carrusel" aria-label="Fotos del Combo Premium Terra">
+                    <div class="galeria__pista">
+                      <figure class="galeria__foto">
+                        <picture>
+                          <source type="image/webp" srcset="assets/img/ritual-combo-800.webp 800w, assets/img/ritual-combo.webp 1600w" sizes="(min-width: 1024px) 40vw, 100vw">
+                          <img src="assets/img/ritual-combo-800.jpg" srcset="assets/img/ritual-combo-800.jpg 800w, assets/img/ritual-combo.jpg 1600w" sizes="(min-width: 1024px) 40vw, 100vw"
+                               width="1600" height="700" loading="lazy" decoding="async"
+                               alt="Héctor masajea con las dos manos el antebrazo de un cliente tumbado, bajo una toalla blanca">
+                        </picture>
+                      </figure>
+                    </div>
+                  </div>
                   <p class="incluye__subtitulo">Masaje y presoterapia a la vez</p>
                   <p class="incluye__intro">Presoterapia en piernas mientras se trabaja la parte superior del cuerpo con masaje manual.</p>
                   <ul class="incluye__lista" role="list">
@@ -476,7 +527,18 @@
               <details class="ritual__incluye">
                 <summary>Qué incluye</summary>
                 <div class="incluye" data-incluye="express">
-                  <!-- [PENDIENTE] Galería de fotos de Terra Express -->
+                  <div class="galeria" data-galeria role="group" aria-roledescription="carrusel" aria-label="Fotos de Terra Express">
+                    <div class="galeria__pista">
+                      <figure class="galeria__foto">
+                        <picture>
+                          <source type="image/webp" srcset="assets/img/ritual-express-800.webp 800w, assets/img/ritual-express.webp 1600w" sizes="(min-width: 1024px) 40vw, 100vw">
+                          <img src="assets/img/ritual-express-800.jpg" srcset="assets/img/ritual-express-800.jpg 800w, assets/img/ritual-express.jpg 1600w" sizes="(min-width: 1024px) 40vw, 100vw"
+                               width="1600" height="700" loading="lazy" decoding="async"
+                               alt="Héctor sostiene y masajea el pie de un cliente durante un masaje exprés">
+                        </picture>
+                      </figure>
+                    </div>
+                  </div>
                   <p class="incluye__subtitulo">Relajante exprés</p>
                   <ul class="incluye__lista" role="list">
                     <li><svg aria-hidden="true"><use href="#i-reloj"/></svg><p><strong>Ideal si tienes poco tiempo.</strong></p></li>
@@ -517,6 +579,15 @@
         <div class="separador" aria-hidden="true"><svg><use href="#s-piedra"/></svg></div>
         <p class="combos__intro">Porque cuidarte por fuera también empieza por sentirte bien por dentro. Combina un masaje relajante con un corte de pelo profesional en JL Loyal Barber Shop, en el mismo sitio y en la misma cita.</p>
 
+        <figure class="combos__foto">
+          <picture>
+            <source type="image/webp" srcset="assets/img/corte-800.webp 800w, assets/img/corte.webp 1477w" sizes="(min-width: 768px) 720px, 100vw">
+            <img src="assets/img/corte-800.jpg" srcset="assets/img/corte-800.jpg 800w, assets/img/corte.jpg 1477w" sizes="(min-width: 768px) 720px, 100vw"
+                 width="1477" height="967" loading="lazy" decoding="async"
+                 alt="Un barbero de JL Loyal Barber Shop corta el pelo a un cliente mientras, al fondo, otra persona recibe un masaje">
+          </picture>
+        </figure>
+
         <table class="combos__tabla">
           <caption class="sr-only">Combos de masaje y barbería, con duración y precio</caption>
           <thead>
@@ -545,10 +616,10 @@
             <div class="galeria__pista">
               <figure class="galeria__foto foto foto--parallax">
                 <picture>
-                  <source type="image/webp" srcset="assets/img/hector-800.webp 800w, assets/img/hector.webp 1229w" sizes="(min-width: 768px) 40vw, 100vw">
-                  <img src="assets/img/hector-800.jpg" srcset="assets/img/hector-800.jpg 800w, assets/img/hector.jpg 1229w" sizes="(min-width: 768px) 40vw, 100vw"
+                  <source type="image/webp" srcset="assets/img/hector-2-800.webp 800w, assets/img/hector-2.webp 1229w" sizes="(min-width: 768px) 40vw, 100vw">
+                  <img src="assets/img/hector-2-800.jpg" srcset="assets/img/hector-2-800.jpg 800w, assets/img/hector-2.jpg 1229w" sizes="(min-width: 768px) 40vw, 100vw"
                        width="1229" height="1536" loading="lazy" decoding="async" data-parallax
-                       alt="Héctor Salom, quiromasajista y creador de Terra Massatge, sentado en la camilla de su sala, sonriendo">
+                       alt="Héctor Salom, quiromasajista y creador de Terra Massatge, concentrado en un masaje de hombros y cuello">
                 </picture>
               </figure>
             </div>

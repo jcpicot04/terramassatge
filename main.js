@@ -244,6 +244,24 @@
     }
   }
 
+  /* ---------- Hero: vídeo de ambiente (sin audio). Solo se reproduce con movimiento permitido,
+     sin ahorro de datos y mientras el hero está a la vista; si no, se queda el póster. ---------- */
+  var videoHero = document.querySelector('[data-hero-video]');
+  var conexion = navigator.connection || {};
+  if (videoHero && !reduce && !conexion.saveData) {
+    var reproducir = function () {
+      var p = videoHero.play();
+      if (p && p.catch) p.catch(function () {});
+    };
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(function (entradas) {
+        entradas[0].isIntersecting ? reproducir() : videoHero.pause();
+      }, { threshold: 0.05 }).observe(videoHero);
+    } else {
+      reproducir();
+    }
+  }
+
   /* ---------- Navegación: fondo sólido al hacer scroll + indicador "desliza" ---------- */
   var nav = document.querySelector('[data-nav]');
   var desliza = document.querySelector('.hero__desliza');

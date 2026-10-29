@@ -456,6 +456,15 @@ p + p { margin-top: var(--sp-2); }
   will-change: transform;
   pointer-events: none;
 }
+/* Vídeo de ambiente a pantalla completa tras el logo, oscurecido para que se lea el texto */
+.hero__video { position: absolute; inset: 0; overflow: hidden; }
+.hero__video video { width: 100%; height: 100%; object-fit: cover; }
+.hero__video::after {
+  content: ""; position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse at center, rgb(0 0 0 / 0.25) 0%, rgb(0 0 0 / 0.55) 100%),
+    linear-gradient(to bottom, rgb(0 0 0 / 0.45) 0%, rgb(0 0 0 / 0) 25%, rgb(0 0 0 / 0) 60%, rgb(0 0 0 / 0.5) 100%);
+}
 .hero__contenido { position: relative; display: grid; justify-items: center; gap: var(--sp-4); }
 .hero__titulo { margin: 0; line-height: 0; }
 .hero__marca {
@@ -759,6 +768,9 @@ div.ritual__desc { display: grid; gap: var(--sp-1); }
 .combos .contenedor { display: grid; justify-items: center; }
 .combos .separador { color: var(--terra-bronce); }
 .combos__intro { margin-inline: auto; }
+.combos__foto { width: 100%; margin: var(--sp-4) 0; }
+.combos__foto img { display: block; width: 100%; height: auto; aspect-ratio: 3 / 2; object-fit: cover; }
+@media (min-width: 768px) { .combos__foto img { aspect-ratio: 16 / 9; } }
 
 .alianza {
   display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 0.6rem var(--sp-2);
