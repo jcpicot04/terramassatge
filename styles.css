@@ -770,11 +770,12 @@ div.ritual__desc { display: grid; gap: var(--sp-1); }
 /* Transición suave papel → noche → papel en lugar de un corte seco (solo en el relleno, sin tocar el contenido) */
 .combos::before, .combos::after {
   content: ""; position: absolute; left: 0; right: 0;
-  height: var(--sp-seccion);
+  height: clamp(2.5rem, 2rem + 2vw, 4rem);
   pointer-events: none;
 }
-.combos::before { top: 0; background: linear-gradient(to bottom, var(--terra-papel) 0%, rgb(237 228 216 / 0.55) 25%, rgb(237 228 216 / 0.15) 60%, rgb(237 228 216 / 0) 100%); }
-.combos::after { bottom: 0; background: linear-gradient(to top, var(--terra-papel) 0%, rgb(237 228 216 / 0.55) 25%, rgb(237 228 216 / 0.15) 60%, rgb(237 228 216 / 0) 100%); }
+/* Curva suave (ease) para que no se note el inicio ni el final del degradado */
+.combos::before { top: 0; background: linear-gradient(to bottom, var(--terra-papel) 0%, rgb(237 228 216 / 0.8) 12%, rgb(237 228 216 / 0.5) 30%, rgb(237 228 216 / 0.2) 55%, rgb(237 228 216 / 0.05) 80%, rgb(237 228 216 / 0) 100%); }
+.combos::after { bottom: 0; background: linear-gradient(to top, var(--terra-papel) 0%, rgb(237 228 216 / 0.8) 12%, rgb(237 228 216 / 0.5) 30%, rgb(237 228 216 / 0.2) 55%, rgb(237 228 216 / 0.05) 80%, rgb(237 228 216 / 0) 100%); }
 .combos .contenedor { display: grid; justify-items: center; }
 .combos .separador { color: var(--terra-bronce); }
 .combos__intro { margin-inline: auto; }
