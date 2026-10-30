@@ -521,8 +521,10 @@
     scrollTrigger: {
       trigger: hero,
       start: 'top top',
-      end: '+=80%',
+      // Efecto cortina: el hero queda fijo y la sección siguiente sube por encima mientras se disuelve
+      end: '+=60%',
       pin: true,
+      pinSpacing: false,
       scrub: true,
       anticipatePin: 1
     }

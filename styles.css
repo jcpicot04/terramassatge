@@ -441,7 +441,7 @@ p + p { margin-top: var(--sp-2); }
   min-height: 100vh;
   min-height: 100svh;
   display: grid; place-items: center;
-  padding: calc(var(--nav-alto) + var(--sp-3)) var(--gutter) var(--sp-6);
+  padding: calc(var(--nav-alto) + var(--sp-3)) var(--gutter) var(--sp-3);
   background: var(--terra-noche);
   color: var(--terra-arena);
   text-align: center;
@@ -518,6 +518,8 @@ p + p { margin-top: var(--sp-2); }
 /* =============================================================================
    QUÉ ES TERRA
    ========================================================================== */
+/* Pegada al hero: sin colchón extra entre la luz y el titular */
+.terra { padding-top: clamp(2.5rem, 1.5rem + 3vw, 4.5rem); }
 .terra__grid { display: grid; gap: var(--sp-5); }
 .terra__texto .titulo { text-align: center; }
 .terra__texto p { margin-inline: auto; }
@@ -765,11 +767,19 @@ div.ritual__desc { display: grid; gap: var(--sp-1); }
    COMBOS · BIENESTAR + ESTILO
    ========================================================================== */
 .combos { text-align: center; }
+/* Transición suave papel → noche → papel en lugar de un corte seco (solo en el relleno, sin tocar el contenido) */
+.combos::before, .combos::after {
+  content: ""; position: absolute; left: 0; right: 0;
+  height: var(--sp-seccion);
+  pointer-events: none;
+}
+.combos::before { top: 0; background: linear-gradient(to bottom, var(--terra-papel) 0%, rgb(237 228 216 / 0.55) 25%, rgb(237 228 216 / 0.15) 60%, rgb(237 228 216 / 0) 100%); }
+.combos::after { bottom: 0; background: linear-gradient(to top, var(--terra-papel) 0%, rgb(237 228 216 / 0.55) 25%, rgb(237 228 216 / 0.15) 60%, rgb(237 228 216 / 0) 100%); }
 .combos .contenedor { display: grid; justify-items: center; }
 .combos .separador { color: var(--terra-bronce); }
 .combos__intro { margin-inline: auto; }
 .combos__foto { width: 100%; margin: var(--sp-4) 0; }
-.combos__foto img { display: block; width: 100%; height: auto; aspect-ratio: 3 / 2; object-fit: cover; }
+.combos__foto img { display: block; width: 100%; height: auto; aspect-ratio: 3 / 2; object-fit: cover; object-position: 50% 30%; }
 @media (min-width: 768px) { .combos__foto img { aspect-ratio: 16 / 9; } }
 
 .alianza {
@@ -1113,3 +1123,18 @@ div.ritual__desc { display: grid; gap: var(--sp-1); }
 .legal ul { padding-left: 1.2em; display: grid; gap: 0.4rem; margin-block: var(--sp-2); }
 .legal .actualizado { font-size: var(--fs--1); margin-top: var(--sp-1); }
 .legal .hueco { background: #F4E3A6; color: #3A2E12; padding: 0 0.3em; border-radius: 2px; }
+
+
+/* ---------- Fotos integradas: bordes suaves y sombra paralela ---------- */
+:root {
+  --foto-radio: 10px;
+  --foto-sombra: 0 6px 18px rgb(77 58 41 / 0.18), 0 2px 6px rgb(77 58 41 / 0.12);
+}
+.galeria__pista,
+.hector__foto .galeria__pista,
+.combos__foto img {
+  border-radius: var(--foto-radio);
+  box-shadow: var(--foto-sombra);
+}
+.seccion--noche .combos__foto img { box-shadow: 0 6px 22px rgb(0 0 0 / 0.55), 0 2px 6px rgb(0 0 0 / 0.4); }
+.galeria__pista { margin-bottom: var(--sp-1); }
